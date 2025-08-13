@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoyoCode - Premium Web Design & Development</title>
+    <meta name="description" content="MoyoCode offers premium web design and development services. Creating web experiences that convert with fast delivery and customer satisfaction.">
+    <meta name="keywords" content="web design, web development, premium websites, custom coding, website maintenance">
+    
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Primary Palette */
+            --rich-gold: #B8860B;
+            --warm-champagne: #D4AF37;
+            --medium-bronze: #CBAE85;
+            --light-beige: #F5E9DA;
+            --charcoal-navy: #0D1B2A;
+            --deep-charcoal: #2C2C2C;
+            
+            /* Supporting Shades */
+            --off-white: #FAFAFA;
+            --warm-gray: #8A8A8A;
+            --olive-green: #556B2F;
+            --dark-olive: #3C4B1C;
+            
+            /* Typography */
+            --font-heading: 'Inter', sans-serif;
+            --font-accent: 'Playfair Display', serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-heading);
+            line-height: 1.6;
+            color: var(--deep-charcoal);
+            background-color: var(--off-white);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(13, 27, 42, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(13, 27, 42, 0.98);
+            padding: 0.5rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-family: var(--font-accent);
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--warm-champagne);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .logo:hover {
+            color: var(--rich-gold);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--off-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--warm-champagne);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--warm-champagne);
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--warm-champagne);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, var(--charcoal-navy) 0%, var(--deep-charcoal) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--off-white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="0.5" fill="%23D4AF37" opacity="0.1"/><circle cx="75" cy="75" r="0.3" fill="%23B8860B" opacity="0.1"/><circle cx="50" cy="10" r="0.4" fill="%23CBAE85" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-family: var(--font-accent);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--warm-champagne), var(--rich-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            color: var(--light-beige);
+            font-weight: 300;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--warm-champagne), var(--rich-gold));
+            color: var(--charcoal-navy);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--warm-champagne);
+            border: 2px solid var(--warm-champagne);
+        }
+
+        .btn-secondary:hover {
+            background: var(--warm-champagne);
+            color: var(--charcoal-navy);
+            transform: translateY(-3px);
+        }
+
+        /* Sections */
+        .section {
+            padding: 6rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-family: var(--font-accent);
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--charcoal-navy);
+        }
+
+        /* About Preview */
+        .about-preview {
+            background: var(--light-beige);
+        }
+
+        .about-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-content p {
+            font-size: 1.2rem;
+            color: var(--deep-charcoal);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .about-highlight {
+            font-family: var(--font-accent);
+            color: var(--rich-gold);
+            font-weight: 600;
+        }
+
+        /* Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: var(--off-white);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            border-color: var(--warm-champagne);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--warm-champagne), var(--rich-gold));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: var(--charcoal-navy);
+        }
+
+        .service-card h3 {
+            font-family: var(--font-accent);
+            font-size: 1.5rem;
+            color: var(--charcoal-navy);
+            margin-bottom: 1rem;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-features li {
+            padding: 0.5rem 0;
+            color: var(--deep-charcoal);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .service-features li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--warm-champagne);
+        }
+
+        /* Portfolio Preview */
+        .portfolio-preview {
+            background: var(--charcoal-navy);
+            color: var(--off-white);
+        }
+
+        .portfolio-preview .section-title {
+            color: var(--warm-champagne);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .portfolio-item {
+            background: var(--deep-charcoal);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, var(--medium-bronze), var(--warm-champagne));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--charcoal-navy);
+        }
+
+        .portfolio-info {
+            padding: 1.5rem;
+        }
+
+        .portfolio-info h4 {
+            font-family: var(--font-accent);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--warm-champagne);
+        }
+
+        .portfolio-info p {
+            color: var(--light-beige);
+            font-size: 0.9rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: var(--light-beige);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: var(--off-white);
+            padding: 2rem;
+            border-radius: 15px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 1.5rem;
+            font-size: 4rem;
+            color: var(--warm-champagne);
+            font-family: var(--font-accent);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: var(--deep-charcoal);
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--rich-gold);
+        }
+
+        /* Process */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--warm-champagne), var(--rich-gold));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--charcoal-navy);
+        }
+
+        .process-step h4 {
+            font-family: var(--font-accent);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--charcoal-navy);
+        }
+
+        /* Contact */
+        .contact {
+            background: var(--charcoal-navy);
+            color: var(--off-white);
+        }
+
+        .contact .section-title {
+            color: var(--warm-champagne);
+        }
+
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            color: var(--light-beige);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 1rem;
+            border: 2px solid var(--deep-charcoal);
+            border-radius: 10px;
+            background: var(--deep-charcoal);
+            color: var(--off-white);
+            font-family: var(--font-heading);
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--warm-champagne);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: var(--deep-charcoal);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--warm-champagne);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--warm-champagne);
+            color: var(--charcoal-navy);
+            transform: translateY(-3px);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: flex;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .process-steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations - Remove initial hidden state, let GSAP handle it */
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">MoyoCode</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content fade-in">
+            <h1>I Design & Build Web Experiences That Convert</h1>
+            <p>Transforming your vision into premium digital solutions with unmatched creativity and technical excellence</p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn btn-primary">Start a Project</a>
+                <a href="#portfolio" class="btn btn-secondary">View My Work</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Preview -->
+    <section id="about" class="section about-preview">
+        <div class="container">
+            <h2 class="section-title fade-in">About MoyoCode</h2>
+            <div class="about-content fade-in">
+                <p>I specialize in <span class="about-highlight">bringing your ideas to life in ways never seen before</span>. With a passion for cutting-edge design and custom development, I create digital experiences that not only look stunning but drive real business results.</p>
+                <p>At MoyoCode, we feel, understand, and visualize our clients' brand identity, delivering fast solutions with uncompromising customer satisfaction.</p>
+                <a href="about.html" class="btn btn-primary">Learn More About Me</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Overview -->
+    <section id="services" class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">Services</h2>
+            <div class="services-grid">
+                <div class="service-card slide-in-left">
+                    <div class="service-icon">🎨</div>
+                    <h3>Web Design</h3>
+                    <ul class="service-features">
+                        <li>Custom UI/UX Design</li>
+                        <li>Responsive Layouts</li>
+                        <li>Brand Identity Integration</li>
+                        <li>User Experience Optimization</li>
+                        <li>Modern Visual Aesthetics</li>
+                    </ul>
+                    <p>Creating visually stunning and user-friendly designs that captivate your audience and drive engagement.</p>
+                </div>
+                
+                <div class="service-card slide-in-right">
+                    <div class="service-icon">💻</div>
+                    <h3>Web Development</h3>
+                    <ul class="service-features">
+                        <li>Custom-Coded Solutions</li>
+                        <li>Fast Loading Performance</li>
+                        <li>SEO Optimization</li>
+                        <li>Mobile-First Development</li>
+                        <li>CMS Integration</li>
+                    </ul>
+                    <p>Building robust, scalable websites with clean code and exceptional performance across all devices.</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="services.html" class="btn btn-primary">View All Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Preview -->
+    <section id="portfolio" class="section portfolio-preview">
+        <div class="container">
+            <h2 class="section-title fade-in">Featured Work</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item scale-in">
+                    <div class="portfolio-image">🏢</div>
+                    <div class="portfolio-info">
+                        <h4>Corporate Rebrand</h4>
+                        <p>Complete digital transformation for a Fortune 500 company, increasing conversion by 150%</p>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item scale-in">
+                    <div class="portfolio-image">🛍️</div>
+                    <div class="portfolio-info">
+                        <h4>E-commerce Platform</h4>
+                        <p>Custom shopping experience with advanced features and seamless checkout process</p>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item scale-in">
+                    <div class="portfolio-image">🎯</div>
+                    <div class="portfolio-info">
+                        <h4>SaaS Dashboard</h4>
+                        <p>Intuitive data visualization platform with real-time analytics and user management</p>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="portfolio.html" class="btn btn-primary">View All Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section testimonials">
+        <div class="container">
+            <h2 class="section-title fade-in">Client Testimonials</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card slide-in-left">
+                    <p class="testimonial-text">MoyoCode transformed our online presence completely. The attention to detail and innovative approach exceeded all our expectations. Our conversion rate increased by 200%!</p>
+                    <div class="testimonial-author">Sarah Johnson, CEO of TechFlow</div>
+                </div>
+                
+                <div class="testimonial-card slide-in-right">
+                    <p class="testimonial-text">Working with MoyoCode was a game-changer. The custom development solutions were exactly what we needed, delivered on time and with exceptional quality.</p>
+                    <div class="testimonial-author">Michael Chen, Founder of StartupX</div>
+                </div>
+                
+                <div class="testimonial-card fade-in">
+                    <p class="testimonial-text">The most professional and creative web developer I've worked with. MoyoCode's ability to understand our vision and bring it to life was remarkable.</p>
+                    <div class="testimonial-author">Emma Rodriguez, Marketing Director</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">My Process</h2>
+            <div class="process-steps">
+                <div class="process-step fade-in">
+                    <div class="step-number">1</div>
+                    <h4>Discovery</h4>
+                    <p>Understanding your vision, goals, and target audience</p>
+                </div>
+                
+                <div class="process-step fade-in">
+                    <div class="step-number">2</div>
+                    <h4>Strategy</h4>
+                    <p>Creating a comprehensive plan and design approach</p>
+                </div>
+                
+                <div class="process-step fade-in">
+                    <div class="step-number">3</div>
+                    <h4>Design</h4>
+                    <p>Crafting visually stunning and user-friendly interfaces</p>
+                </div>
+                
+                <div class="process-step fade-in">
+                    <div class="step-number">4</div>
+                    <h4>Develop</h4>
+                    <p>Building robust, scalable, and performance-optimized solutions</p>
+                </div>
+                
+                <div class="process-step fade-in">
+                    <div class="step-number">5</div>
+                    <h4>Test</h4>
+                    <p>Rigorous testing across all devices and browsers</p>
+                </div>
+                
+                <div class="process-step fade-in">
+                    <div class="step-number">6</div>
+                    <h4>Launch</h4>
+                    <p>Deploying your project and providing ongoing support</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <h2 class="section-title fade-in">Let's Create Something Amazing</h2>
+            <div class="contact-content fade-in">
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="project">Project Type</label>
+                        <select id="project" name="project" style="padding: 1rem; border: 2px solid var(--deep-charcoal); border-radius: 10px; background: var(--deep-charcoal); color: var(--off-white); font-family: var(--font-heading);">
+                            <option value="">Select a service</option>
+                            <option value="web-design">Web Design</option>
+                            <option value="web-development">Web Development</option>
+                            <option value="both">Design + Development</option>
+                            <option value="maintenance">Website Maintenance</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Project Details</label>
+                        <textarea id="message" name="message" placeholder="Tell me about your project vision..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+                
+                <div class="social-links">
+                    <a href="#" class="social-link" title="LinkedIn">💼</a>
+                    <a href="#" class="social-link" title="Twitter">🐦</a>
+                    <a href="#" class="social-link" title="GitHub">🔗</a>
+                    <a href="#" class="social-link" title="Email">📧</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Register GSAP ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Navbar scroll effect with throttling for better performance
+        let ticking = false;
+        
+        function updateNavbar() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            ticking = false;
+        }
+        
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(updateNavbar);
+                ticking = true;
+            }
+        });
+
+        // Smooth scrolling for navigation links with offset for fixed navbar
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const navbarHeight = document.querySelector('.navbar').offsetHeight;
+                    const targetPosition = target.offsetTop - navbarHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // GSAP Animations
+        // Hero animation
+        gsap.from('.hero-content', {
+            duration: 1.2,
+            y: 100,
+            opacity: 0,
+            ease: 'power3.out',
+            delay: 0.3
+        });
+
+        // Fade in animations
+        gsap.utils.toArray('.fade-in').forEach(element => {
+            gsap.fromTo(element, 
+                {
+                    y: 50,
+                    opacity: 0
+                },
+                {
+                    duration: 1,
+                    y: 0,
+                    opacity: 1,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: element,
+                        start: 'top 85%',
+                        end: 'bottom 15%',
+                        toggleActions: 'play none none none'
+                    }
+                }
+            );
+        });
+
+        // Slide in left animations
+        gsap.utils.toArray('.slide-in-left').forEach(element => {
+            gsap.fromTo(element,
+                {
+                    x: -100,
+                    opacity: 0
+                },
+                {
+                    duration: 1,
+                    x: 0,
+                    opacity: 1,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: element,
+                        start: 'top 85%',
+                        end: 'bottom 15%',
+                        toggleActions: 'play none none none'
+                    }
+                }
+            );
+        });
+
+        // Slide in right animations
+        gsap.utils.toArray('.slide-in-right').forEach(element => {
+            gsap.fromTo(element,
+                {
+                    x: 100,
+                    opacity: 0
+                },
+                {
+                    duration: 1,
+                    x: 0,
+                    opacity: 1,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: element,
+                        start: 'top 85%',
+                        end: 'bottom 15%',
+                        toggleActions: 'play none none none'
+                    }
+                }
+            );
+        });
+
+        // Scale in animations
+        gsap.utils.toArray('.scale-in').forEach(element => {
+            gsap.fromTo(element,
+                {
+                    scale: 0.8,
+                    opacity: 0
+                },
+                {
+                    duration: 1,
+                    scale: 1,
+                    opacity: 1,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: element,
+                        start: 'top 85%',
+                        end: 'bottom 15%',
+                        toggleActions: 'play none none none'
+                    }
+                }
+            );
+        });
+
+        // Portfolio items stagger animation
+        gsap.fromTo('.portfolio-item',
+            {
+                y: 50,
+                opacity: 0
+            },
+            {
+                duration: 0.8,
+                y: 0,
+                opacity: 1,
+                stagger: 0.2,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: '.portfolio-grid',
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                }
+            }
+        );
+
+        // Process steps stagger animation
+        gsap.fromTo('.process-step',
+            {
+                y: 30,
+                opacity: 0
+            },
+            {
+                duration: 0.6,
+                y: 0,
+                opacity: 1,
+                stagger: 0.1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: '.process-steps',
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                }
+            }
+        );
+
+        // Service cards hover effect enhancement
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                gsap.to(card, {
+                    duration: 0.3,
+                    y: -10,
+                    boxShadow: '0 20px 60px rgba(0, 0, 0, 0.15)',
+                    ease: 'power2.out'
+                });
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                gsap.to(card, {
+                    duration: 0.3,
+                    y: 0,
+                    boxShadow: '0 10px 40px rgba(0, 0, 0, 0.1)',
+                    ease: 'power2.out'
+                });
+            });
+        });
+
+        // Portfolio items hover effect
+        document.querySelectorAll('.portfolio-item').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                gsap.to(item, {
+                    duration: 0.3,
+                    y: -10,
+                    ease: 'power2.out'
+                });
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                gsap.to(item, {
+                    duration: 0.3,
+                    y: 0,
+                    ease: 'power2.out'
+                });
+            });
+        });
+
+        // Button hover effects
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('mouseenter', () => {
+                gsap.to(btn, {
+                    duration: 0.3,
+                    y: -3,
+                    ease: 'power2.out'
+                });
+            });
+            
+            btn.addEventListener('mouseleave', () => {
+                gsap.to(btn, {
+                    duration: 0.3,
+                    y: 0,
+                    ease: 'power2.out'
+                });
+            });
+        });
+
+        // Form submission handling
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Simulate form submission
+            gsap.to('.contact-form', {
+                duration: 0.3,
+                opacity: 0.5,
+                pointerEvents: 'none'
+            });
+            
+            setTimeout(() => {
+                alert('Thank you for your message! I\'ll get back to you soon.');
+                this.reset();
+                gsap.to('.contact-form', {
+                    duration: 0.3,
+                    opacity: 1,
+                    pointerEvents: 'auto'
+                });
+            }, 1000);
+        });
+
+        // Mobile menu functionality
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenu.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            navLinks.style.flexDirection = 'column';
+            navLinks.style.position = 'absolute';
+            navLinks.style.top = '100%';
+            navLinks.style.left = '0';
+            navLinks.style.right = '0';
+            navLinks.style.background = 'rgba(13, 27, 42, 0.98)';
+            navLinks.style.padding = '1rem';
+            navLinks.style.backdropFilter = 'blur(10px)';
+        });
+
+        // Subtle parallax effect for hero section (only when hero is visible)
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.hero');
+            const heroHeight = parallax.offsetHeight;
+            
+            // Only apply parallax when hero section is visible
+            if (scrolled < heroHeight) {
+                const speed = scrolled * 0.3; // Reduced speed for subtler effect
+                parallax.style.transform = `translateY(${speed}px)`;
+            }
+        });
+
+        // Remove the conflicting Intersection Observer
+        // Elements now show properly with GSAP ScrollTrigger only
+
+        // Add loading animation
+        window.addEventListener('load', () => {
+            gsap.to('body', {
+                duration: 0.5,
+                opacity: 1,
+                ease: 'power2.out'
+            });
+        });
+
+        // Add smooth page transitions preparation
+        document.querySelectorAll('a[href$=".html"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                
+                gsap.to('body', {
+                    duration: 0.5,
+                    opacity: 0,
+                    ease: 'power2.out',
+                    onComplete: () => {
+                        window.location.href = href;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
