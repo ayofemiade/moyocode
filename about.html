@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - MoyoCode | Premium Web Design & Development</title>
+    <meta name="description" content="Learn about MoyoCode's story, philosophy, and expertise in premium web design and development. Discover the passion behind creating exceptional digital experiences.">
+    <meta name="keywords" content="about moyocode, web designer, web developer, premium websites, custom coding, digital experiences">
+    
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Primary Palette */
+            --rich-gold: #B8860B;
+            --warm-champagne: #D4AF37;
+            --medium-bronze: #CBAE85;
+            --light-beige: #F5E9DA;
+            --charcoal-navy: #0D1B2A;
+            --deep-charcoal: #2C2C2C;
+            
+            /* Supporting Shades */
+            --off-white: #FAFAFA;
+            --warm-gray: #8A8A8A;
+            --olive-green: #556B2F;
+            --dark-olive: #3C4B1C;
+            
+            /* Typography */
+            --font-heading: 'Inter', sans-serif;
+            --font-accent: 'Playfair Display', serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-heading);
+            line-height: 1.6;
+            color: var(--deep-charcoal);
+            background-color: var(--off-white);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(13, 27, 42, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(13, 27, 42, 0.98);
+            padding: 0.5rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-family: var(--font-accent);
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--warm-champagne);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .logo:hover {
+            color: var(--rich-gold);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--off-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a.active,
+        .nav-links a:hover {
+            color: var(--warm-champagne);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--warm-champagne);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a.active::after,
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--warm-champagne);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 70vh;
+            background: linear-gradient(135deg, var(--charcoal-navy) 0%, var(--deep-charcoal) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--off-white);
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="0.5" fill="%23D4AF37" opacity="0.1"/><circle cx="75" cy="75" r="0.3" fill="%23B8860B" opacity="0.1"/><circle cx="50" cy="10" r="0.4" fill="%23CBAE85" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-family: var(--font-accent);
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--warm-champagne), var(--rich-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--light-beige);
+            font-weight: 300;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 6rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Story Section */
+        .story-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 6rem;
+        }
+
+        .story-content h2 {
+            font-family: var(--font-accent);
+            font-size: 2.5rem;
+            color: var(--charcoal-navy);
+            margin-bottom: 2rem;
+        }
+
+        .story-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--deep-charcoal);
+        }
+
+        .highlight {
+            color: var(--rich-gold);
+            font-weight: 600;
+        }
+
+        .story-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, var(--medium-bronze), var(--warm-champagne));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: var(--charcoal-navy);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(13, 27, 42, 0.1);
+            border-radius: 20px;
+        }
+
+        /* Philosophy Section */
+        .philosophy-section {
+            background: var(--light-beige);
+            padding: 5rem 0;
+            margin: 4rem 0;
+            border-radius: 30px;
+        }
+
+        .philosophy-content {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .philosophy-content h2 {
+            font-family: var(--font-accent);
+            font-size: 2.5rem;
+            color: var(--charcoal-navy);
+            margin-bottom: 3rem;
+        }
+
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .philosophy-card {
+            background: var(--off-white);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .philosophy-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .philosophy-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--warm-champagne), var(--rich-gold));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.5rem;
+            color: var(--charcoal-navy);
+        }
+
+        .philosophy-card h3 {
+            font-family: var(--font-accent);
+            font-size: 1.3rem;
+            color: var(--charcoal-navy);
+            margin-bottom: 1rem;
+        }
+
+        /* Skills Section */
+        .skills-section {
+            margin: 6rem 0;
+        }
+
+        .skills-section h2 {
+            font-family: var(--font-accent);
+            font-size: 2.5rem;
+            color: var(--charcoal-navy);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .skill-category {
+            background: var(--off-white);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .skill-category h3 {
+            font-family: var(--font-accent);
+            font-size: 1.5rem;
+            color: var(--charcoal-navy);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .skill-category-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--warm-champagne), var(--rich-gold));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--charcoal-navy);
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .skill-item:last-child {
+            border-bottom: none;
+        }
+
+        .skill-name {
+            font-weight: 500;
+            color: var(--deep-charcoal);
+        }
+
+        .skill-level {
+            display: flex;
+            gap: 0.2rem;
+        }
+
+        .skill-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--warm-gray);
+        }
+
+        .skill-dot.active {
+            background: var(--warm-champagne);
+        }
+
+        /* Values Section */
+        .values-section {
+            background: var(--charcoal-navy);
+            color: var(--off-white);
+            padding: 5rem 0;
+            margin: 4rem 0;
+            border-radius: 30px;
+        }
+
+        .values-section h2 {
+            font-family: var(--font-accent);
+            font-size: 2.5rem;
+            color: var(--warm-champagne);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .value-card {
+            background: var(--deep-charcoal);
+            padding: 2.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .value-card h3 {
+            font-family: var(--font-accent);
+            font-size: 1.4rem;
+            color: var(--warm-champagne);
+            margin-bottom: 1rem;
+        }
+
+        .value-card p {
+            color: var(--light-beige);
+            line-height: 1.7;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 4rem 0;
+            background: var(--light-beige);
+            border-radius: 20px;
+            margin: 4rem 0;
+        }
+
+        .cta-section h2 {
+            font-family: var(--font-accent);
+            font-size: 2.2rem;
+            color: var(--charcoal-navy);
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            color: var(--deep-charcoal);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--warm-champagne), var(--rich-gold));
+            color: var(--charcoal-navy);
+            margin-right: 1rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--rich-gold);
+            border: 2px solid var(--rich-gold);
+        }
+
+        .btn-secondary:hover {
+            background: var(--rich-gold);
+            color: var(--off-white);
+            transform: translateY(-3px);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: flex;
+            }
+            
+            .story-section {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .philosophy-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .story-content h2,
+            .philosophy-content h2,
+            .skills-section h2,
+            .values-section h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .btn {
+                display: block;
+                margin: 0.5rem auto;
+                width: fit-content;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">MoyoCode</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>The Story Behind MoyoCode</h1>
+            <p>Discover the passion, expertise, and philosophy that drives exceptional digital experiences</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Story Section -->
+            <section class="story-section">
+                <div class="story-content">
+                    <h2>My Journey into Digital Excellence</h2>
+                    <p>My passion for web design and development began over <span class="highlight">8 years ago</span> when I first discovered the magic of transforming ideas into interactive digital experiences. What started as curiosity quickly evolved into an obsession with creating pixel-perfect, performance-driven websites.</p>
+                    
+                    <p>I've had the privilege of working with <span class="highlight">Fortune 500 companies, innovative startups, and visionary entrepreneurs</span> across various industries. Each project has taught me something new about the delicate balance between stunning aesthetics and flawless functionality.</p>
+                    
+                    <p>Today, MoyoCode represents more than just a service—it's a commitment to excellence, innovation, and the belief that every brand deserves a digital presence that truly represents their vision and drives measurable results.</p>
+                </div>
+                <div class="story-image">
+                    💻
+                </div>
+            </section>
+
+            <!-- Philosophy Section -->
+            <section class="philosophy-section">
+                <div class="philosophy-content">
+                    <h2>My Design Philosophy</h2>
+                    <p>At MoyoCode, we believe that exceptional web experiences are born from understanding, empathy, and meticulous attention to detail. Every pixel serves a purpose, every interaction tells a story.</p>
+                    
+                    <div class="philosophy-grid">
+                        <div class="philosophy-card">
+                            <div class="philosophy-icon">🎯</div>
+                            <h3>Purpose-Driven Design</h3>
+                            <p>Every element is strategically placed to guide users toward meaningful actions and drive business objectives.</p>
+                        </div>
+                        
+                        <div class="philosophy-card">
+                            <div class="philosophy-icon">👥</div>
+                            <h3>Human-Centered Approach</h3>
+                            <p>We design for real people, considering their needs, behaviors, and emotions throughout their digital journey.</p>
+                        </div>
+                        
+                        <div class="philosophy-card">
+                            <div class="philosophy-icon">⚡</div>
+                            <h3>Performance First</h3>
+                            <p>Beautiful design means nothing without lightning-fast performance and seamless user experience.</p>
+                        </div>
+                        
+                        <div class="philosophy-card">
+                            <div class="philosophy-icon">🔄</div>
+                            <h3>Continuous Innovation</h3>
+                            <p>Staying ahead of trends and technologies to deliver cutting-edge solutions that stand the test of time.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Skills Section -->
+            <section class="skills-section">
+                <h2>Technical Expertise</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>
+                            <div class="skill-category-icon">🎨</div>
+                            Design & UX
+                        </h3>
+                        <ul class="skill-list">
+                            <li class="skill-item">
+                                <span class="skill-name">UI/UX Design</span>
+                                <div class="skill-level">
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                </div>
+                            </li>
+                            <li class="skill-item">
+                                <span class="skill-name">Adobe Creative Suite</span>
+                                <div class="skill-level">
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                </div>
+                            </li>
+                            <li class="skill-item">
+                                <span class="skill-name">Figma</span>
+                                <div class="skill-level">
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                </div>
+                            </li>
+                            <li class="skill-item">
+                                <span class="skill-name">Prototyping</span>
+                                <div class="skill-level">
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3>
+                            <div class="skill-category-icon">💻</div>
+                            Frontend Development
+                        </h3>
+                        <ul class="skill-list">
+                            <li class="skill-item">
+                                <span class="skill-name">HTML5 & CSS3</span>
+                                <div class="skill-level">
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                </div>
+                            </li>
+                            <li class="skill-item">
+                                <span class="skill-name">JavaScript & ES6+</span>
+                                <div class="skill-level">
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                </div>
+                            </li>
+                            <li class="skill-item">
+                                <span class="skill-name">React & Vue.js</span>
+                                <div class="skill-level">
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot"></div>
+                                </div>
+                            </li>
+                            <li class="skill-item">
+                                <span class="skill-name">GSAP & Animations</span>
+                                <div class="skill-level">
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3>
+                            <div class="skill-category-icon">⚙️</div>
+                            Backend & Tools
+                        </h3>
+                        <ul class="skill-list">
+                            <li class="skill-item">
+                                <span class="skill-name">Node.js & Express</span>
+                                <div class="skill-level">
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot"></div>
+                                </div>
+                            </li>
+                            <li class="skill-item">
+                                <span class="skill-name">WordPress & CMS</span>
+                                <div class="skill-level">
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                </div>
+                            </li>
+                            <li class="skill-item">
+                                <span class="skill-name">Git & Version Control</span>
+                                <div class="skill-level">
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot"></div>
+                                </div>
+                            </li>
+                            <li class="skill-item">
+                                <span class="skill-name">SEO & Performance</span>
+                                <div class="skill-level">
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                    <div class="skill-dot active"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Values Section -->
+            <section class="values-section">
+                <h2>Core Values That Drive Excellence</h2>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <h3>Fast Delivery & Customer Satisfaction</h3>
+                        <p>We understand that time is crucial in business. That's why we prioritize efficient workflows and clear communication to deliver exceptional results within agreed timelines, ensuring complete customer satisfaction every step of the way.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <h3>Prices Lower Than Ever Seen</h3>
+                        <p>Premium quality doesn't have to come with premium prices. We offer competitive pricing that makes high-end web design and development accessible to businesses of all sizes, without compromising on quality or innovation.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <h3>Understanding Your Brand Identity</h3>
+                        <p>We don't just create websites; we feel, understand, and visualize your brand's unique identity. Every design decision is made with your brand's personality, values, and target audience in mind.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <h3>Custom-Coded Excellence</h3>
+                        <p>No templates, no shortcuts. Every line of code is crafted specifically for your project, ensuring optimal performance, unique functionality, and a truly personalized digital experience.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="cta-section">
+                <h2>Ready to Bring Your Vision to Life?</h2>
+                <p>Let's collaborate to create a digital experience that not only looks exceptional but drives real results for your business. Together, we'll transform your ideas into reality.</p>
+                <a href="contact.html" class="btn btn-primary">Start Your Project</a>
+                <a href="portfolio.html" class="btn btn-secondary">View My Work</a>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        // Register GSAP ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Navbar scroll effect with throttling for better performance
+        let ticking = false;
+        
+        function updateNavbar() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            ticking = false;
+        }
+        
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(updateNavbar);
+                ticking = true;
+            }
+        });
+
+        // Smooth scrolling for navigation links with offset for fixed navbar
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const navbarHeight = document.querySelector('.navbar').offsetHeight;
+                    const targetPosition = target.offsetTop - navbarHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // GSAP Animations
+        // Hero animation
+        gsap.from('.hero-content', {
+            duration: 1.2,
+            y: 100,
+            opacity: 0,
+            ease: 'power3.out',
+            delay: 0.3
+        });
+
+        // Story section animation
+        gsap.fromTo('.story-content',
+            {
+                x: -100,
+                opacity: 0
+            },
+            {
+                duration: 1,
+                x: 0,
+                opacity: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: '.story-section',
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                }
+            }
+        );
+
+        gsap.fromTo('.story-image',
+            {
+                x: 100,
+                opacity: 0
+            },
+            {
+                duration: 1,
+                x: 0,
+                opacity: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: '.story-section',
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                }
+            }
+        );
+
+        // Philosophy cards stagger animation
+        gsap.fromTo('.philosophy-card',
+            {
+                y: 50,
+                opacity: 0
+            },
+            {
+                duration: 0.8,
+                y: 0,
+                opacity: 1,
+                stagger: 0.2,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: '.philosophy-grid',
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                }
+            }
+        );
+
+        // Skills categories animation
+        gsap.fromTo('.skill-category',
+            {
+                y: 50,
+                opacity: 0
+            },
+            {
+                duration: 0.8,
+                y: 0,
+                opacity: 1,
+                stagger: 0.3,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: '.skills-grid',
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                }
+            }
+        );
+
+        // Values cards animation
+        gsap.fromTo('.value-card',
+            {
+                scale: 0.8,
+                opacity: 0
+            },
+            {
+                duration: 0.8,
+                scale: 1,
+                opacity: 1,
+                stagger: 0.2,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: '.values-grid',
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                }
+            }
+        );
+
+        // CTA section animation
+        gsap.fromTo('.cta-section',
+            {
+                y: 50,
+                opacity: 0
+            },
+            {
+                duration: 1,
+                y: 0,
+                opacity: 1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: '.cta-section',
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                }
+            }
+        );
+
+        // Skill dots animation
+        gsap.utils.toArray('.skill-category').forEach(category => {
+            const dots = category.querySelectorAll('.skill-dot.active');
+            gsap.fromTo(dots,
+                {
+                    scale: 0,
+                    opacity: 0
+                },
+                {
+                    duration: 0.3,
+                    scale: 1,
+                    opacity: 1,
+                    stagger: 0.1,
+                    ease: 'back.out(1.7)',
+                    scrollTrigger: {
+                        trigger: category,
+                        start: 'top 85%',
+                        toggleActions: 'play none none none'
+                    }
+                }
+            );
+        });
+
+        // Enhanced hover effects
+        document.querySelectorAll('.philosophy-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                gsap.to(card, {
+                    duration: 0.3,
+                    y: -10,
+                    ease: 'power2.out'
+                });
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                gsap.to(card, {
+                    duration: 0.3,
+                    y: 0,
+                    ease: 'power2.out'
+                });
+            });
+        });
+
+        document.querySelectorAll('.skill-category').forEach(category => {
+            category.addEventListener('mouseenter', () => {
+                gsap.to(category, {
+                    duration: 0.3,
+                    y: -5,
+                    boxShadow: '0 20px 60px rgba(0, 0, 0, 0.15)',
+                    ease: 'power2.out'
+                });
+            });
+            
+            category.addEventListener('mouseleave', () => {
+                gsap.to(category, {
+                    duration: 0.3,
+                    y: 0,
+                    boxShadow: '0 10px 40px rgba(0, 0, 0, 0.1)',
+                    ease: 'power2.out'
+                });
+            });
+        });
+
+        // Button hover effects
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('mouseenter', () => {
+                gsap.to(btn, {
+                    duration: 0.3,
+                    y: -3,
+                    ease: 'power2.out'
+                });
+            });
+            
+            btn.addEventListener('mouseleave', () => {
+                gsap.to(btn, {
+                    duration: 0.3,
+                    y: 0,
+                    ease: 'power2.out'
+                });
+            });
+        });
+
+        // Mobile menu functionality
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenu.addEventListener('click', () => {
+            if (navLinks.style.display === 'flex') {
+                gsap.to(navLinks, {
+                    duration: 0.3,
+                    opacity: 0,
+                    y: -20,
+                    ease: 'power2.out',
+                    onComplete: () => {
+                        navLinks.style.display = 'none';
+                    }
+                });
+            } else {
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '100%';
+                navLinks.style.left = '0';
+                navLinks.style.right = '0';
+                navLinks.style.background = 'rgba(13, 27, 42, 0.98)';
+                navLinks.style.padding = '1rem';
+                navLinks.style.backdropFilter = 'blur(10px)';
+                navLinks.style.opacity = '0';
+                navLinks.style.transform = 'translateY(-20px)';
+                
+                gsap.to(navLinks, {
+                    duration: 0.3,
+                    opacity: 1,
+                    y: 0,
+                    ease: 'power2.out'
+                });
+            }
+        });
+
+        // Page transition effects
+        document.querySelectorAll('a[href$=".html"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                
+                gsap.to('body', {
+                    duration: 0.5,
+                    opacity: 0,
+                    ease: 'power2.out',
+                    onComplete: () => {
+                        window.location.href = href;
+                    }
+                });
+            });
+        });
+
+        // Add loading animation
+        window.addEventListener('load', () => {
+            gsap.to('body', {
+                duration: 0.5,
+                opacity: 1,
+                ease: 'power2.out'
+            });
+        });
+
+        // Parallax effect for story image
+        gsap.to('.story-image', {
+            y: -50,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '.story-section',
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: 1
+            }
+        });
+
+        // Counter animation for skill dots (simulate loading)
+        gsap.utils.toArray('.skill-item').forEach(item => {
+            const activeDots = item.querySelectorAll('.skill-dot.active');
+            
+            ScrollTrigger.create({
+                trigger: item,
+                start: 'top 90%',
+                onEnter: () => {
+                    activeDots.forEach((dot, index) => {
+                        gsap.fromTo(dot,
+                            {
+                                scale: 0,
+                                backgroundColor: '#8A8A8A'
+                            },
+                            {
+                                scale: 1,
+                                backgroundColor: '#D4AF37',
+                                duration: 0.3,
+                                delay: index * 0.1,
+                                ease: 'back.out(1.7)'
+                            }
+                        );
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
