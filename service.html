@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - MoyoCode | Premium Web Design & Development</title>
+    <meta name="description" content="Discover MoyoCode's comprehensive web design and development services. Custom-coded solutions, maintenance packages, and more at unbeatable prices.">
+    <meta name="keywords" content="web design services, web development, custom coding, website maintenance, premium websites, affordable web services">
+    
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Primary Palette */
+            --rich-gold: #B8860B;
+            --warm-champagne: #D4AF37;
+            --medium-bronze: #CBAE85;
+            --light-beige: #F5E9DA;
+            --charcoal-navy: #0D1B2A;
+            --deep-charcoal: #2C2C2C;
+            
+            /* Supporting Shades */
+            --off-white: #FAFAFA;
+            --warm-gray: #8A8A8A;
+            --olive-green: #556B2F;
+            --dark-olive: #3C4B1C;
+            
+            /* Typography */
+            --font-heading: 'Inter', sans-serif;
+            --font-accent: 'Playfair Display', serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-heading);
+            line-height: 1.6;
+            color: var(--deep-charcoal);
+            background-color: var(--off-white);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(13, 27, 42, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(13, 27, 42, 0.98);
+            padding: 0.5rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-family: var(--font-accent);
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--warm-champagne);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .logo:hover {
+            color: var(--rich-gold);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--off-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a.active,
+        .nav-links a:hover {
+            color: var(--warm-champagne);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--warm-champagne);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a.active::after,
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--warm-champagne);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--charcoal-navy) 0%, var(--deep-charcoal) 100%);
+            color: var(--off-white);
+            text-align: center;
+            padding: 8rem 0 4rem;
+            margin-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="0.5" fill="%23D4AF37" opacity="0.1"/><circle cx="75" cy="75" r="0.3" fill="%23B8860B" opacity="0.1"/><circle cx="50" cy="10" r="0.4" fill="%23CBAE85" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .page-header-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-header h1 {
+            font-family: var(--font-accent);
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--warm-champagne), var(--rich-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--light-beige);
+            font-weight: 300;
+        }
+
+        /* Sections */
+        .section {
+            padding: 6rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-family: var(--font-accent);
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--charcoal-navy);
+        }
+
+        /* Service Categories */
+        .service-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 4rem;
+            margin-bottom: 6rem;
+        }
+
+        .service-category {
+            background: var(--off-white);
+            border-radius: 25px;
+            padding: 3rem;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+            border: 2px solid transparent;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(135deg, var(--warm-champagne), var(--rich-gold));
+            border-radius: 25px 25px 0 0;
+        }
+
+        .service-category:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.15);
+            border-color: var(--warm-champagne);
+        }
+
+        .service-category-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--warm-champagne), var(--rich-gold));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1.5rem;
+            font-size: 2rem;
+            color: var(--charcoal-navy);
+        }
+
+        .service-category h2 {
+            font-family: var(--font-accent);
+            font-size: 2rem;
+            color: var(--charcoal-navy);
+            margin: 0;
+        }
+
+        .service-description {
+            font-size: 1.1rem;
+            color: var(--deep-charcoal);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .service-features li {
+            padding: 0.8rem 0;
+            color: var(--deep-charcoal);
+            position: relative;
+            padding-left: 2rem;
+            font-size: 1rem;
+        }
+
+        .service-features li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--warm-champagne);
+            font-size: 1.2rem;
+        }
+
+        .price-tag {
+            background: linear-gradient(135deg, var(--light-beige), var(--medium-bronze));
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 2rem;
+            border: 2px solid var(--warm-champagne);
+        }
+
+        .price-tag .price {
+            font-family: var(--font-accent);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--rich-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .price-tag .price-note {
+            font-size: 0.9rem;
+            color: var(--deep-charcoal);
+            font-style: italic;
+        }
+
+        /* Additional Services */
+        .additional-services {
+            background: var(--light-beige);
+            padding: 6rem 0;
+        }
+
+        .additional-services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .additional-service {
+            background: var(--off-white);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .additional-service:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            border-color: var(--warm-champagne);
+        }
+
+        .additional-service h3 {
+            font-family: var(--font-accent);
+            font-size: 1.5rem;
+            color: var(--charcoal-navy);
+            margin-bottom: 1rem;
+        }
+
+        .additional-service-price {
+            font-family: var(--font-accent);
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--rich-gold);
+            margin-bottom: 1rem;
+        }
+
+        /* Process Section */
+        .process {
+            background: var(--charcoal-navy);
+            color: var(--off-white);
+        }
+
+        .process .section-title {
+            color: var(--warm-champagne);
+        }
+
+        .process-timeline {
+            position: relative;
+            margin-top: 4rem;
+        }
+
+        .process-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--warm-champagne), var(--rich-gold));
+            transform: translateX(-50%);
+        }
+
+        .process-step {
+            display: flex;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .process-step:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .process-step-content {
+            flex: 1;
+            max-width: 45%;
+            background: var(--deep-charcoal);
+            padding: 2rem;
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .process-step:nth-child(odd) .process-step-content {
+            margin-right: 10%;
+        }
+
+        .process-step:nth-child(even) .process-step-content {
+            margin-left: 10%;
+        }
+
+        .process-step-number {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--warm-champagne), var(--rich-gold));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--charcoal-navy);
+            z-index: 2;
+        }
+
+        .process-step h4 {
+            font-family: var(--font-accent);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--warm-champagne);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--rich-gold), var(--warm-champagne));
+            color: var(--charcoal-navy);
+            text-align: center;
+            padding: 6rem 0;
+        }
+
+        .cta-section h2 {
+            font-family: var(--font-accent);
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .btn-primary {
+            background: var(--charcoal-navy);
+            color: var(--warm-champagne);
+            border: 2px solid var(--charcoal-navy);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--charcoal-navy);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(13, 27, 42, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--charcoal-navy);
+            border: 2px solid var(--charcoal-navy);
+            margin-left: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background: var(--charcoal-navy);
+            color: var(--warm-champagne);
+            transform: translateY(-3px);
+        }
+
+        /* Value Proposition */
+        .value-proposition {
+            background: var(--off-white);
+            text-align: center;
+            padding: 6rem 0;
+        }
+
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .value-item {
+            padding: 2rem;
+        }
+
+        .value-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--warm-champagne), var(--rich-gold));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: var(--charcoal-navy);
+        }
+
+        .value-item h3 {
+            font-family: var(--font-accent);
+            font-size: 1.3rem;
+            color: var(--charcoal-navy);
+            margin-bottom: 1rem;
+        }
+         .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: var(--deep-charcoal);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--warm-champagne);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--medium-bronze);
+            color: var(--charcoal-navy);
+            transform: translateY(-3px);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: flex;
+            }
+            
+            .service-categories {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .service-category {
+                padding: 2rem;
+            }
+            
+            .service-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            
+            .additional-services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .process-timeline::before {
+                left: 30px;
+            }
+            
+            .process-step {
+                flex-direction: column !important;
+                padding-left: 80px;
+            }
+            
+            .process-step-content {
+                max-width: 100%;
+                margin: 0 !important;
+            }
+            
+            .process-step-number {
+                left: 30px;
+                position: absolute;
+            }
+            
+            .value-grid {
+                 grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .page-header {
+                padding: 6rem 0 3rem;
+            }
+            
+            .section {
+                padding: 4rem 0;
+            }
+            
+            .value-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn-secondary {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">MoyoCode</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html" class="active">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-header-content">
+            <h1 class="fade-in">Our Services</h1>
+            <p class="fade-in">Premium web solutions at prices lower than ever seen before. We deliver excellence without compromise.</p>
+        </div>
+    </section>
+
+    <!-- Main Services -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">Core Services</h2>
+            <div class="service-categories">
+                <!-- Web Design -->
+                <div class="service-category slide-in-left">
+                    <div class="service-category-header">
+                        <div class="service-icon">🎨</div>
+                        <h2>Web Design</h2>
+                    </div>
+                    <p class="service-description">Creating visually stunning, user-centric designs that captivate your audience and drive conversions. Every pixel is crafted with purpose and precision.</p>
+                    
+                    <ul class="service-features">
+                        <li>Custom UI/UX Design tailored to your brand</li>
+                        <li>Responsive design for all devices and screen sizes</li>
+                        <li>Brand identity integration and visual consistency</li>
+                        <li>User experience optimization and journey mapping</li>
+                        <li>Interactive prototypes and design systems</li>
+                        <li>Accessibility compliance (WCAG 2.1)</li>
+                        <li>Modern visual aesthetics with cutting-edge trends</li>
+                        <li>Conversion-focused design strategies</li>
+                    </ul>
+                    
+                    <div class="price-tag">
+                        <div class="price">Starting at $799</div>
+                        <div class="price-note">Complete design package including revisions</div>
+                    </div>
+                </div>
+
+                <!-- Web Development -->
+                <div class="service-category slide-in-right">
+                    <div class="service-category-header">
+                        <div class="service-icon">💻</div>
+                        <h2>Web Development</h2>
+                    </div>
+                    <p class="service-description">Building robust, scalable, and lightning-fast websites with clean, custom-coded solutions. No templates, just premium craftsmanship.</p>
+                    
+                    <ul class="service-features">
+                        <li>100% custom-coded solutions (no templates)</li>
+                        <li>Blazing-fast loading speeds and performance optimization</li>
+                        <li>SEO-optimized structure and meta implementations</li>
+                        <li>Mobile-first responsive development</li>
+                        <li>Content Management System (CMS) integration</li>
+                        <li>E-commerce functionality and payment gateways</li>
+                        <li>Advanced animations and micro-interactions</li>
+                        <li>Cross-browser compatibility and testing</li>
+                        <li>Security implementation and SSL certificates</li>
+                    </ul>
+                    
+                    <div class="price-tag">
+                        <div class="price">Starting at $1,299</div>
+                        <div class="price-note">Full development with 30 days support</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Additional Services -->
+    <section class="section additional-services">
+        <div class="container">
+            <h2 class="section-title fade-in">Additional Services</h2>
+            <div class="additional-services-grid">
+                <div class="additional-service scale-in">
+                    <h3>Website Maintenance & Updates</h3>
+                    <div class="additional-service-price">$199/month</div>
+                    <ul class="service-features">
+                        <li>Regular content updates and modifications</li>
+                        <li>Security monitoring and updates</li>
+                        <li>Performance optimization</li>
+                        <li>Backup management</li>
+                        <li>24/7 monitoring and support</li>
+                    </ul>
+                </div>
+                
+                <div class="additional-service scale-in">
+                    <h3>Design + Development Package</h3>
+                    <div class="additional-service-price">$1,899</div>
+                    <ul class="service-features">
+                        <li>Complete design and development</li>
+                        <li>Seamless workflow integration</li>
+                        <li>20% savings over separate services</li>
+                        <li>Extended support period</li>
+                        <li>Priority project handling</li>
+                    </ul>
+                </div>
+                
+                <div class="additional-service scale-in">
+                    <h3>Express Delivery</h3>
+                    <div class="additional-service-price">+50% fee</div>
+                    <ul class="service-features">
+                        <li>Rush project completion</li>
+                        <li>7-14 day delivery timeline</li>
+                        <li>Dedicated project focus</li>
+                        <li>Daily progress updates</li>
+                        <li>Priority communication</li>
+                    </ul>
+                </div>
+                
+                <div class="additional-service scale-in">
+                    <h3>SEO Optimization</h3>
+                    <div class="additional-service-price">$399</div>
+                    <ul class="service-features">
+                        <li>Technical SEO audit and implementation</li>
+                        <li>Keyword research and optimization</li>
+                        <li>Meta tags and schema markup</li>
+                        <li>Page speed optimization</li>
+                        <li>Search console setup</li>
+                    </ul>
+                </div>
+                
+                <div class="additional-service scale-in">
+                    <h3>Branding Package</h3>
+                    <div class="additional-service-price">$599</div>
+                    <ul class="service-features">
+                        <li>Logo design and brand identity</li>
+                        <li>Color palette and typography</li>
+                        <li>Brand guidelines document</li>
+                        <li>Business card design</li>
+                        <li>Social media assets</li>
+                    </ul>
+                </div>
+                
+                <div class="additional-service scale-in">
+                    <h3>Hosting & Domain Setup</h3>
+                    <div class="additional-service-price">$99</div>
+                    <ul class="service-features">
+                        <li>Premium hosting setup</li>
+                        <li>Domain registration/transfer</li>
+                        <li>SSL certificate installation</li>
+                        <li>Email account configuration</li>
+                        <li>DNS management</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process -->
+    <section class="section process">
+        <div class="container">
+            <h2 class="section-title fade-in">Our Process</h2>
+            <div class="process-timeline">
+                <div class="process-step fade-in">
+                    <div class="process-step-content">
+                        <h4>Discovery & Strategy</h4>
+                        <p>We start by understanding your vision, target audience, and business goals. This foundation ensures every design and development decision aligns with your objectives.</p>
+                    </div>
+                    <div class="process-step-number">1</div>
+                </div>
+                
+                <div class="process-step fade-in">
+                    <div class="process-step-content">
+                        <h4>Planning & Architecture</h4>
+                        <p>Creating detailed wireframes, user journeys, and technical specifications. We plan every interaction and feature before any code is written.</p>
+                    </div>
+                    <div class="process-step-number">2</div>
+                </div>
+                
+                <div class="process-step fade-in">
+                    <div class="process-step-content">
+                        <h4>Design & Prototyping</h4>
+                        <p>Crafting pixel-perfect designs with interactive prototypes. You'll see and experience your website before development begins.</p>
+                    </div>
+                    <div class="process-step-number">3</div>
+                </div>
+                
+                <div class="process-step fade-in">
+                    <div class="process-step-content">
+                        <h4>Development & Testing</h4>
+                        <p>Building your website with clean, optimized code. Rigorous testing ensures flawless performance across all devices and browsers.</p>
+                    </div>
+                    <div class="process-step-number">4</div>
+                </div>
+                
+                <div class="process-step fade-in">
+                    <div class="process-step-content">
+                        <h4>Launch & Support</h4>
+                        <p>Seamless deployment with comprehensive training. We provide ongoing support to ensure your website continues to perform excellently.</p>
+                    </div>
+                    <div class="process-step-number">5</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Proposition -->
+    <section class="section value-proposition">
+        <div class="container">
+            <h2 class="section-title fade-in">Why Choose MoyoCode?</h2>
+            <div class="value-grid">
+                <div class="value-item fade-in">
+                    <div class="value-icon">⚡</div>
+                    <h3>Fast Delivery</h3>
+                    <p>We understand the importance of speed in business. Our streamlined process ensures rapid delivery without compromising quality.</p>
+                </div>
+                
+                <div class="value-item fade-in">
+                    <div class="value-icon">💎</div>
+                    <h3>Premium Quality</h3>
+                    <p>Every project receives our full attention and expertise. We don't cut corners – only deliver excellence.</p>
+                </div>
+                
+                <div class="value-item fade-in">
+                    <div class="value-icon">🎯</div>
+                    <h3>Customer Satisfaction</h3>
+                    <p>Your success is our success. We work closely with you to ensure the final product exceeds your expectations.</p>
+                </div>
+                
+                <div class="value-item fade-in">
+                    <div class="value-icon">💰</div>
+                    <h3>Unbeatable Prices</h3>
+                    <p>Premium services at prices lower than ever seen. We believe excellent web design should be accessible to all businesses.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="fade-in">Ready to Transform Your Digital Presence?</h2>
+            <p class="fade-in">Let's bring your vision to life with premium web solutions that drive real results. Get started today and experience the MoyoCode difference.</p>
+            <div class="fade-in">
+                <a href="#contact" class="btn btn-primary">Start Your Project</a>
+                <a href="portfolio.html" class="btn btn-secondary">View Our Work</a>
+            </div>
+            <div class="social-links">
+                    <a href="#" class="social-link" title="LinkedIn">💼</a>
+                    <a href="#" class="social-link" title="Twitter">🐦</a>
+                    <a href="#" class="social-link" title="GitHub">🔗</a>
+                    <a href="#" class="social-link" title="Email">📧</a>
+                </div>
+        </div>
+    </section>
+
+    <script>
+        // Register GSAP ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Navbar scroll effect
+        let ticking = false;
+        
+        function updateNavbar() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            ticking = false;
+        }
+        
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(updateNavbar);
+                ticking = true;
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const navbarHeight = document.querySelector('.navbar').offsetHeight;
+                    const targetPosition = target.offsetTop - navbarHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // GSAP Animations
+        // Fade in animations
+        gsap.utils.toArray('.fade-in').forEach(element => {
+            gsap.fromTo(element, 
+                {
+                    y: 50,
+                    opacity: 0
+                },
+                {
+                    duration: 1,
+                    y: 0,
+                    opacity: 1,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: element,
+                        start: 'top 85%',
+                        end: 'bottom 15%',
+                        toggleActions: 'play none none none'
+                    }
+                }
+            );
+        });
+
+        // Slide in left animations
+        gsap.utils.toArray('.slide-in-left').forEach(element => {
+            gsap.fromTo(element,
+                {
+                    x: -100,
+                    opacity: 0
+                },
+                {
+                    duration: 1.2,
+                    x: 0,
+                    opacity: 1,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: element,
+                        start: 'top 85%',
+                        end: 'bottom 15%',
+                        toggleActions: 'play none none none'
+                    }
+                }
+            );
+        });
+
+        // Slide in right animations
+        gsap.utils.toArray('.slide-in-right').forEach(element => {
+            gsap.fromTo(element,
+                {
+                    x: 100,
+                    opacity: 0
+                },
+                {
+                    duration: 1.2,
+                    x: 0,
+                    opacity: 1,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: element,
+                        start: 'top 85%',
+                        end: 'bottom 15%',
+                        toggleActions: 'play none none none'
+                    }
+                }
+            );
+        });
+
+        // Scale in animations
+        gsap.utils.toArray('.scale-in').forEach(element => {
+            gsap.fromTo(element,
+                {
+                    scale: 0.8,
+                    opacity: 0
+                },
+                {
+                    duration: 1,
+                    scale: 1,
+                    opacity: 1,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: element,
+                        start: 'top 85%',
+                        end: 'bottom 15%',
+                        toggleActions: 'play none none none'
+                    }
+                }
+            );
+        });
+
+        // Service categories stagger animation
+        gsap.fromTo('.service-category',
+            {
+                y: 60,
+                opacity: 0
+            },
+            {
+                duration: 1.2,
+                y: 0,
+                opacity: 1,
+                stagger: 0.3,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: '.service-categories',
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                }
+            }
+        );
+
+        // Additional services stagger animation
+        gsap.fromTo('.additional-service',
+            {
+                y: 40,
+                opacity: 0
+            },
+            {
+                duration: 0.8,
+                y: 0,
+                opacity: 1,
+                stagger: 0.1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: '.additional-services-grid',
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                }
+            }
+        );
+
+        // Process timeline animation
+        gsap.fromTo('.process-step',
+            {
+                y: 50,
+                opacity: 0
+            },
+            {
+                duration: 1,
+                y: 0,
+                opacity: 1,
+                stagger: 0.2,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: '.process-timeline',
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                }
+            }
+        );
+
+        // Value items stagger animation
+        gsap.fromTo('.value-item',
+            {
+                y: 30,
+                opacity: 0
+            },
+            {
+                duration: 0.8,
+                y: 0,
+                opacity: 1,
+                stagger: 0.15,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: '.value-grid',
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                }
+            }
+        );
+
+        // Service category hover effects
+        document.querySelectorAll('.service-category').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                gsap.to(card, {
+                    duration: 0.4,
+                    y: -10,
+                    boxShadow: '0 25px 70px rgba(0, 0, 0, 0.15)',
+                    ease: 'power2.out'
+                });
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                gsap.to(card, {
+                    duration: 0.4,
+                    y: 0,
+                    boxShadow: '0 15px 50px rgba(0, 0, 0, 0.1)',
+                    ease: 'power2.out'
+                });
+            });
+        });
+
+        // Additional service hover effects
+        document.querySelectorAll('.additional-service').forEach(service => {
+            service.addEventListener('mouseenter', () => {
+                gsap.to(service, {
+                    duration: 0.3,
+                    y: -5,
+                    boxShadow: '0 20px 60px rgba(0, 0, 0, 0.15)',
+                    ease: 'power2.out'
+                });
+            });
+            
+            service.addEventListener('mouseleave', () => {
+                gsap.to(service, {
+                    duration: 0.3,
+                    y: 0,
+                    boxShadow: '0 10px 40px rgba(0, 0, 0, 0.1)',
+                    ease: 'power2.out'
+                });
+            });
+        });
+
+        // Button hover effects
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('mouseenter', () => {
+                gsap.to(btn, {
+                    duration: 0.3,
+                    y: -3,
+                    ease: 'power2.out'
+                });
+            });
+            
+            btn.addEventListener('mouseleave', () => {
+                gsap.to(btn, {
+                    duration: 0.3,
+                    y: 0,
+                    ease: 'power2.out'
+                });
+            });
+        });
+
+        // Mobile menu functionality
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenu.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            navLinks.style.flexDirection = 'column';
+            navLinks.style.position = 'absolute';
+            navLinks.style.top = '100%';
+            navLinks.style.left = '0';
+            navLinks.style.right = '0';
+            navLinks.style.background = 'rgba(13, 27, 42, 0.98)';
+            navLinks.style.padding = '1rem';
+            navLinks.style.backdropFilter = 'blur(10px)';
+        });
+
+        // Page loading animation
+        window.addEventListener('load', () => {
+            gsap.to('body', {
+                duration: 0.5,
+                opacity: 1,
+                ease: 'power2.out'
+            });
+        });
+
+        // Smooth page transitions
+        document.querySelectorAll('a[href$=".html"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                
+                gsap.to('body', {
+                    duration: 0.5,
+                    opacity: 0,
+                    ease: 'power2.out',
+                    onComplete: () => {
+                        window.location.href = href;
+                    }
+                });
+            });
+        });
+
+        // Price highlight animation on scroll
+        gsap.utils.toArray('.price').forEach(price => {
+            gsap.fromTo(price,
+                {
+                    scale: 0.8,
+                    opacity: 0
+                },
+                {
+                    duration: 0.8,
+                    scale: 1,
+                    opacity: 1,
+                    ease: 'back.out(1.7)',
+                    scrollTrigger: {
+                        trigger: price,
+                        start: 'top 90%',
+                        toggleActions: 'play none none none'
+                    }
+                }
+            );
+        });
+
+        // Service icons rotation on hover
+        document.querySelectorAll('.service-icon, .value-icon').forEach(icon => {
+            icon.addEventListener('mouseenter', () => {
+                gsap.to(icon, {
+                    duration: 0.5,
+                    rotation: 360,
+                    ease: 'power2.out'
+                });
+            });
+        });
+
+        // Parallax effect for page header
+        gsap.to('.page-header', {
+            yPercent: -50,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '.page-header',
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: true
+            }
+        });
+
+        // Timeline line animation
+        gsap.fromTo('.process-timeline::before',
+            {
+                scaleY: 0
+            },
+            {
+                scaleY: 1,
+                transformOrigin: 'top',
+                duration: 2,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: '.process-timeline',
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                }
+            }
+        );
+    </script>
+</body>
+</html>
