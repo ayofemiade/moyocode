@@ -1,0 +1,1659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - MoyoCode | Premium Web Design & Development Projects</title>
+    <meta name="description" content="Explore MoyoCode's portfolio of premium web design and development projects. See case studies, before/after transformations, and client success stories.">
+    <meta name="keywords" content="web design portfolio, web development projects, case studies, premium websites, custom coding, client work">
+    
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Primary Palette */
+            --rich-gold: #B8860B;
+            --warm-champagne: #D4AF37;
+            --medium-bronze: #CBAE85;
+            --light-beige: #F5E9DA;
+            --charcoal-navy: #0D1B2A;
+            --deep-charcoal: #2C2C2C;
+            
+            /* Supporting Shades */
+            --off-white: #FAFAFA;
+            --warm-gray: #8A8A8A;
+            --olive-green: #556B2F;
+            --dark-olive: #3C4B1C;
+            
+            /* Typography */
+            --font-heading: 'Inter', sans-serif;
+            --font-accent: 'Playfair Display', serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-heading);
+            line-height: 1.6;
+            color: var(--deep-charcoal);
+            background-color: var(--off-white);
+            overflow-x: hidden;
+        }
+
+        /* Navigation - Same as homepage */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(13, 27, 42, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(13, 27, 42, 0.98);
+            padding: 0.5rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-family: var(--font-accent);
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--warm-champagne);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .logo:hover {
+            color: var(--rich-gold);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--off-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--warm-champagne);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--warm-champagne);
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--warm-champagne);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Page Header */
+        .page-header {
+            min-height: 60vh;
+            height: auto;
+            background: linear-gradient(135deg, var(--charcoal-navy) 0%, var(--deep-charcoal) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--off-white);
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+            padding: 4rem 2rem;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="0.5" fill="%23D4AF37" opacity="0.1"/><circle cx="75" cy="75" r="0.3" fill="%23B8860B" opacity="0.1"/><circle cx="50" cy="10" r="0.4" fill="%23CBAE85" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            max-width: 800px;
+            width: 100%;
+            z-index: 2;
+            position: relative;
+            padding: 0 1rem;
+        }
+
+        .header-content h1 {
+            font-family: var(--font-accent);
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--warm-champagne), var(--rich-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .header-content p {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            color: var(--light-beige);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .portfolio-stats {
+            display: flex;
+            justify-content: center;
+            gap: clamp(1.5rem, 5vw, 3rem);
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .stat-item {
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .stat-number {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            font-weight: 700;
+            color: var(--warm-champagne);
+            font-family: var(--font-accent);
+            line-height: 1.1;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+            color: var(--light-beige);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            line-height: 1.3;
+            word-wrap: break-word;
+            max-width: 120px;
+            margin: 0 auto;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 6rem 0 0 0;
+            position: relative;
+            z-index: 3;
+            background: var(--off-white);
+        }
+
+        /* Smooth transition from hero to main content */
+        .main-content::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: 0;
+            right: 0;
+            height: 100px;
+          
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section {
+            margin-bottom: 6rem;
+            position: relative;
+        }
+
+        /* Smooth section reveal animation */
+        .section::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--warm-champagne), transparent);
+            opacity: 0;
+            animation: sectionReveal 1s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes sectionReveal {
+            0% {
+                opacity: 0;
+                width: 0;
+            }
+            100% {
+                opacity: 1;
+                width: 100px;
+            }
+        }
+
+        .section-title {
+            font-family: var(--font-accent);
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--charcoal-navy);
+        }
+
+        /* Filter Buttons */
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--warm-champagne);
+            background: transparent;
+            color: var(--warm-champagne);
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: var(--font-heading);
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--warm-champagne);
+            color: var(--charcoal-navy);
+            transform: translateY(-2px);
+        }
+
+        /* Portfolio Grid */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .portfolio-item {
+            background: var(--off-white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+            border-color: var(--warm-champagne);
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, var(--medium-bronze), var(--warm-champagne));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--charcoal-navy);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(212, 175, 55, 0.1) 0%, rgba(184, 134, 11, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .portfolio-item:hover .portfolio-image::before {
+            opacity: 1;
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(13, 27, 42, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .overlay-content {
+            text-align: center;
+            color: var(--off-white);
+        }
+
+        .view-project-btn {
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--warm-champagne), var(--rich-gold));
+            color: var(--charcoal-navy);
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .view-project-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .portfolio-info {
+            padding: 2rem;
+        }
+
+        .portfolio-category {
+            color: var(--warm-champagne);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-title {
+            font-family: var(--font-accent);
+            font-size: 1.5rem;
+            color: var(--charcoal-navy);
+            margin-bottom: 1rem;
+        }
+
+        .portfolio-description {
+            color: var(--deep-charcoal);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .portfolio-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .portfolio-tag {
+            padding: 0.25rem 0.75rem;
+            background: var(--light-beige);
+            color: var(--rich-gold);
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .portfolio-metrics {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--light-beige);
+        }
+
+        .metric-item {
+            text-align: center;
+        }
+
+        .metric-value {
+            font-weight: 700;
+            color: var(--rich-gold);
+            font-size: 1.1rem;
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: var(--warm-gray);
+        }
+
+        /* Case Study Previews */
+        .case-studies {
+            background: var(--light-beige);
+            margin: 0 -2rem;
+            padding: 6rem 2rem;
+        }
+
+        .case-study-item {
+            background: var(--off-white);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 3rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .case-study-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            min-height: 400px;
+        }
+
+        .case-study-text {
+            padding: 3rem;
+        }
+
+        .case-study-visual {
+            background: linear-gradient(135deg, var(--medium-bronze), var(--warm-champagne));
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: var(--charcoal-navy);
+        }
+
+        .case-study-category {
+            color: var(--warm-champagne);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .case-study-title {
+            font-family: var(--font-accent);
+            font-size: 2rem;
+            color: var(--charcoal-navy);
+            margin-bottom: 1rem;
+        }
+
+        .case-study-description {
+            color: var(--deep-charcoal);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .case-study-results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .result-item {
+            text-align: center;
+            padding: 1rem;
+            background: var(--light-beige);
+            border-radius: 10px;
+        }
+
+        .result-percentage {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--rich-gold);
+        }
+
+        .result-label {
+            font-size: 0.8rem;
+            color: var(--deep-charcoal);
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--warm-champagne), var(--rich-gold));
+            color: var(--charcoal-navy);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+        }
+
+        /* CTA Section */
+        .portfolio-cta {
+            background: var(--charcoal-navy);
+            color: var(--off-white);
+            text-align: center;
+            padding: 6rem 2rem;
+            margin: 0 -2rem;
+        }
+
+        .portfolio-cta h2 {
+            font-family: var(--font-accent);
+            font-size: 2.5rem;
+            color: var(--warm-champagne);
+            margin-bottom: 1rem;
+        }
+
+        .portfolio-cta p {
+            font-size: 1.2rem;
+            color: var(--light-beige);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: var(--deep-charcoal);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--warm-champagne);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--warm-champagne);
+            color: var(--charcoal-navy);
+            transform: translateY(-3px);
+        }
+
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .page-header {
+                min-height: 50vh;
+                padding: 3rem 1.5rem;
+            }
+            
+            .portfolio-stats {
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: flex;
+            }
+            
+            .page-header {
+                min-height: 45vh;
+                padding: 2.5rem 1rem;
+                margin-top: 70px;
+            }
+            
+            .header-content {
+                padding: 0 0.5rem;
+            }
+            
+            .portfolio-stats {
+                gap: 1.5rem;
+                justify-content: space-around;
+            }
+            
+            .stat-item {
+                min-width: 80px;
+                flex: 1;
+                max-width: 120px;
+            }
+            
+            .filter-buttons {
+                gap: 0.5rem;
+                padding: 0 1rem;
+            }
+            
+            .filter-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+                border-radius: 20px;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .case-study-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .case-study-text {
+                padding: 2rem;
+                order: 2;
+            }
+            
+            .case-study-visual {
+                height: 200px;
+                order: 1;
+            }
+            
+            .case-study-results {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .portfolio-cta {
+                padding: 4rem 1rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .page-header {
+                min-height: 40vh;
+                padding: 2rem 0.75rem;
+            }
+            
+            .portfolio-stats {
+                flex-direction: column;
+                gap: 2rem;
+                margin-top: 1.5rem;
+            }
+            
+            .stat-item {
+                min-width: auto;
+                max-width: none;
+            }
+            
+            .filter-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.75rem;
+            }
+            
+            .filter-btn {
+                width: 200px;
+                text-align: center;
+            }
+            
+            .case-study-visual {
+                height: 150px;
+            }
+            
+            .case-study-results {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .page-header {
+                min-height: 35vh;
+                padding: 1.5rem 0.5rem;
+            }
+            
+            .header-content {
+                padding: 0;
+            }
+            
+            .portfolio-stats {
+                gap: 1.5rem;
+            }
+            
+            .stat-number {
+                margin-bottom: 0.5rem;
+            }
+            
+            .case-studies {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            .portfolio-cta {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            .case-study-text {
+                padding: 1.5rem;
+            }
+            
+            .portfolio-cta {
+                padding: 3rem 1rem;
+            }
+        }
+
+        /* Extra small devices */
+        @media (max-width: 360px) {
+            .page-header {
+                padding: 1rem 0.25rem;
+            }
+            
+            .filter-btn {
+                width: 180px;
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            
+            .portfolio-metrics {
+                flex-direction: column;
+                gap: 0.75rem;
+                text-align: center;
+            }
+            
+            .metric-item {
+                border-bottom: 1px solid var(--light-beige);
+                padding-bottom: 0.5rem;
+            }
+            
+            .metric-item:last-child {
+                border-bottom: none;
+                padding-bottom: 0;
+            }
+        }
+
+        /* Landscape orientation for mobile devices */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .page-header {
+                min-height: 80vh;
+                padding: 2rem 1rem;
+            }
+            
+            .portfolio-stats {
+                flex-direction: row;
+                gap: 2rem;
+            }
+        }
+
+        /* Loading States */
+        .portfolio-item.loading {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .portfolio-item.loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">MoyoCode</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="service.html">Services</a></li>
+                <li><a href="portfolio.html" class="active">Portfolio</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="header-content">
+            <h1>My Portfolio</h1>
+            <p>Showcasing premium web experiences that drive results and exceed expectations</p>
+            <div class="portfolio-stats">
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Projects Completed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">200%</div>
+                    <div class="stat-label">Avg Conversion Increase</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Client Satisfaction</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Filter Section -->
+            <section class="section">
+                <h2 class="section-title">Featured Projects</h2>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All Projects</button>
+                    <button class="filter-btn" data-filter="web-design">Web Design</button>
+                    <button class="filter-btn" data-filter="web-development">Web Development</button>
+                    <button class="filter-btn" data-filter="ecommerce">E-commerce</button>
+                    <button class="filter-btn" data-filter="corporate">Corporate</button>
+                </div>
+
+                <!-- Portfolio Grid -->
+                <div class="portfolio-grid" id="portfolioGrid">
+                    <!-- Project 1 -->
+                    <div class="portfolio-item" data-category="web-design corporate">
+                        <div class="portfolio-image">
+                            🏢
+                            <div class="portfolio-overlay">
+                                <div class="overlay-content">
+                                    <a href="#" class="view-project-btn">View Case Study</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-info">
+                            <div class="portfolio-category">Corporate Rebrand</div>
+                            <h3 class="portfolio-title">TechFlow Solutions</h3>
+                            <p class="portfolio-description">Complete digital transformation for a Fortune 500 company, including brand redesign and custom web platform development.</p>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">UI/UX Design</span>
+                                <span class="portfolio-tag">Custom Development</span>
+                                <span class="portfolio-tag">CMS Integration</span>
+                            </div>
+                            <div class="portfolio-metrics">
+                                <div class="metric-item">
+                                    <div class="metric-value">150%</div>
+                                    <div class="metric-label">Conversion Increase</div>
+                                </div>
+                                <div class="metric-item">
+                                    <div class="metric-value">60%</div>
+                                    <div class="metric-label">Faster Loading</div>
+                                </div>
+                                <div class="metric-item">
+                                    <div class="metric-value">300%</div>
+                                    <div class="metric-label">More Engagement</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="portfolio-item" data-category="ecommerce web-development">
+                        <div class="portfolio-image">
+                            🛍️
+                            <div class="portfolio-overlay">
+                                <div class="overlay-content">
+                                    <a href="#" class="view-project-btn">View Case Study</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-info">
+                            <div class="portfolio-category">E-commerce Platform</div>
+                            <h3 class="portfolio-title">LuxeStyle Boutique</h3>
+                            <p class="portfolio-description">Premium fashion e-commerce platform with advanced filtering, wishlist functionality, and seamless checkout experience.</p>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">E-commerce</span>
+                                <span class="portfolio-tag">Payment Integration</span>
+                                <span class="portfolio-tag">Mobile-First</span>
+                            </div>
+                            <div class="portfolio-metrics">
+                                <div class="metric-item">
+                                    <div class="metric-value">400%</div>
+                                    <div class="metric-label">Sales Increase</div>
+                                </div>
+                                <div class="metric-item">
+                                    <div class="metric-value">80%</div>
+                                    <div class="metric-label">Cart Completion</div>
+                                </div>
+                                <div class="metric-item">
+                                    <div class="metric-value">250%</div>
+                                    <div class="metric-label">Mobile Sales</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="portfolio-item" data-category="web-development">
+                        <div class="portfolio-image">
+                            🎯
+                            <div class="portfolio-overlay">
+                                <div class="overlay-content">
+                                    <a href="#" class="view-project-btn">View Case Study</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-info">
+                            <div class="portfolio-category">SaaS Platform</div>
+                            <h3 class="portfolio-title">DataViz Analytics</h3>
+                            <p class="portfolio-description">Comprehensive analytics dashboard with real-time data visualization, user management, and advanced reporting capabilities.</p>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">Dashboard Design</span>
+                                <span class="portfolio-tag">Data Visualization</span>
+                                <span class="portfolio-tag">Real-time Updates</span>
+                            </div>
+                            <div class="portfolio-metrics">
+                                <div class="metric-item">
+                                    <div class="metric-value">90%</div>
+                                    <div class="metric-label">User Retention</div>
+                                </div>
+                                <div class="metric-item">
+                                    <div class="metric-value">50%</div>
+                                    <div class="metric-label">Faster Insights</div>
+                                </div>
+                                <div class="metric-item">
+                                    <div class="metric-value">180%</div>
+                                    <div class="metric-label">User Productivity</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 4 -->
+                    <div class="portfolio-item" data-category="web-design">
+                        <div class="portfolio-image">
+                            🏥
+                            <div class="portfolio-overlay">
+                                <div class="overlay-content">
+                                    <a href="#" class="view-project-btn">View Case Study</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-info">
+                            <div class="portfolio-category">Healthcare Portal</div>
+                            <h3 class="portfolio-title">WellCare Medical</h3>
+                            <p class="portfolio-description">Patient portal redesign focusing on accessibility, appointment booking, and medical record management.</p>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">Healthcare</span>
+                                <span class="portfolio-tag">Accessibility</span>
+                                <span class="portfolio-tag">Patient Portal</span>
+                            </div>
+                            <div class="portfolio-metrics">
+                                <div class="metric-item">
+                                    <div class="metric-value">200%</div>
+                                    <div class="metric-label">Appointment Bookings</div>
+                                </div>
+                                <div class="metric-item">
+                                    <div class="metric-value">95%</div>
+                                    <div class="metric-label">Accessibility Score</div>
+                                </div>
+                                <div class="metric-item">
+                                    <div class="metric-value">70%</div>
+                                    <div class="metric-label">Reduced Support Calls</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 5 -->
+                    <div class="portfolio-item" data-category="web-design web-development">
+                        <div class="portfolio-image">
+                            🎓
+                            <div class="portfolio-overlay">
+                                <div class="overlay-content">
+                                    <a href="#" class="view-project-btn">View Case Study</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-info">
+                            <div class="portfolio-category">Education Platform</div>
+                            <h3 class="portfolio-title">LearnForward Academy</h3>
+                            <p class="portfolio-description">Online learning platform with course management, progress tracking, and interactive video content delivery.</p>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">E-learning</span>
+                                <span class="portfolio-tag">Video Platform</span>
+                                <span class="portfolio-tag">Progress Tracking</span>
+                            </div>
+                            <div class="portfolio-metrics">
+                                <div class="metric-item">
+                                    <div class="metric-value">85%</div>
+                                    <div class="metric-label">Course Completion</div>
+                                </div>
+                                <div class="metric-item">
+                                    <div class="metric-value">300%</div>
+                                    <div class="metric-label">Student Engagement</div>
+                                </div>
+                                <div class="metric-item">
+                                    <div class="metric-value">120%</div>
+                                    <div class="metric-label">Revenue Growth</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 6 -->
+                    <div class="portfolio-item" data-category="corporate web-development">
+                        <div class="portfolio-image">
+                            🏦
+                            <div class="portfolio-overlay">
+                                <div class="overlay-content">
+                                    <a href="#" class="view-project-btn">View Case Study</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-info">
+                            <div class="portfolio-category">Financial Services</div>
+                            <h3 class="portfolio-title">SecureBank Digital</h3>
+                            <p class="portfolio-description">Modern banking interface with enhanced security features, account management, and mobile-first design approach.</p>
+                            <div class="portfolio-tags">
+                                <span class="portfolio-tag">Financial</span>
+                                <span class="portfolio-tag">Security</span>
+                                <span class="portfolio-tag">Banking</span>
+                            </div>
+                            <div class="portfolio-metrics">
+                                <div class="metric-item">
+                                    <div class="metric-value">40%</div>
+                                    <div class="metric-label">Faster Transactions</div>
+                                </div>
+                                <div class="metric-item">
+                                    <div class="metric-value">99.9%</div>
+                                    <div class="metric-label">Security Score</div>
+                                </div>
+                                <div class="metric-item">
+                                    <div class="metric-value">220%</div>
+                                    <div class="metric-label">Mobile Usage</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Case Studies Section -->
+        <section class="case-studies">
+            <div class="container">
+                <h2 class="section-title">In-Depth Case Studies</h2>
+                
+                <!-- Case Study 1 -->
+                <div class="case-study-item">
+                    <div class="case-study-content">
+                        <div class="case-study-text">
+                            <div class="case-study-category">E-commerce Transformation</div>
+                            <h3 class="case-study-title">LuxeStyle: From Concept to $2M Revenue</h3>
+                            <p class="case-study-description">
+                                LuxeStyle came to us as a startup with a vision for premium fashion e-commerce. We built their entire digital presence from scratch, focusing on luxury aesthetics, seamless user experience, and conversion optimization. The result? A platform that generated $2M in revenue within the first year.
+                            </p>
+                            <div class="case-study-results">
+                                <div class="result-item">
+                                    <div class="result-percentage">400%</div>
+                                    <div class="result-label">Sales Growth</div>
+                                </div>
+                                <div class="result-item">
+                                    <div class="result-percentage">2.3s</div>
+                                    <div class="result-label">Load Time</div>
+                                </div>
+                                <div class="result-item">
+                                    <div class="result-percentage">89%</div>
+                                    <div class="result-label">Mobile Conversion</div>
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-primary">Read Full Case Study</a>
+                        </div>
+                        <div class="case-study-visual">🛍️</div>
+                    </div>
+                </div>
+
+                <!-- Case Study 2 -->
+                <div class="case-study-item">
+                    <div class="case-study-content">
+                        <div class="case-study-visual">🏢</div>
+                        <div class="case-study-text">
+                            <div class="case-study-category">Corporate Digital Transformation</div>
+                            <h3 class="case-study-title">TechFlow: Modernizing Enterprise UX</h3>
+                            <p class="case-study-description">
+                                TechFlow Solutions needed a complete digital overhaul to match their innovative technology services. We redesigned their entire web presence, implemented a custom CMS, and created a seamless user journey that increased their enterprise client acquisition by 150%.
+                            </p>
+                            <div class="case-study-results">
+                                <div class="result-item">
+                                    <div class="result-percentage">150%</div>
+                                    <div class="result-label">Lead Generation</div>
+                                </div>
+                                <div class="result-item">
+                                    <div class="result-percentage">60%</div>
+                                    <div class="result-label">Faster Loading</div>
+                                </div>
+                                <div class="result-item">
+                                    <div class="result-percentage">95%</div>
+                                    <div class="result-label">Client Satisfaction</div>
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-primary">Read Full Case Study</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Case Study 3 -->
+                <div class="case-study-item">
+                    <div class="case-study-content">
+                        <div class="case-study-text">
+                            <div class="case-study-category">SaaS Platform Development</div>
+                            <h3 class="case-study-title">DataViz: Simplifying Complex Analytics</h3>
+                            <p class="case-study-description">
+                                DataViz Analytics approached us to create an intuitive dashboard for their complex data visualization platform. We designed and developed a user-friendly interface that made advanced analytics accessible to non-technical users, resulting in 90% user retention and 180% productivity increase.
+                            </p>
+                            <div class="case-study-results">
+                                <div class="result-item">
+                                    <div class="result-percentage">90%</div>
+                                    <div class="result-label">User Retention</div>
+                                </div>
+                                <div class="result-item">
+                                    <div class="result-percentage">180%</div>
+                                    <div class="result-label">Productivity Gain</div>
+                                </div>
+                                <div class="result-item">
+                                    <div class="result-percentage">5ms</div>
+                                    <div class="result-label">Response Time</div>
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-primary">Read Full Case Study</a>
+                        </div>
+                        <div class="case-study-visual">🎯</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="portfolio-cta">
+            <div class="container">
+                <h2>Ready to Create Your Success Story?</h2>
+                <p>Let's collaborate to build a digital experience that drives real results for your business. Every project is an opportunity to exceed expectations and deliver premium quality.</p>
+                <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
+                    <a href="index.html#contact" class="btn btn-primary">Start Your Project</a>
+                    <a href="service.html" class="btn" style="background: transparent; color: var(--warm-champagne); border: 2px solid var(--warm-champagne);">View Services</a>
+                </div>
+                 <div class="social-links">
+                    <a href="#" class="social-link" title="LinkedIn">💼</a>
+                    <a href="#" class="social-link" title="Twitter">🐦</a>
+                    <a href="#" class="social-link" title="GitHub">🔗</a>
+                    <a href="#" class="social-link" title="Email">📧</a>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <script>
+        // Register GSAP ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Navbar scroll effect
+        let ticking = false;
+        
+        function updateNavbar() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            ticking = false;
+        }
+        
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(updateNavbar);
+                ticking = true;
+            }
+        });
+
+        // Portfolio Filter Functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+
+                const filter = button.getAttribute('data-filter');
+
+                portfolioItems.forEach(item => {
+                    const categories = item.getAttribute('data-category');
+                    
+                    if (filter === 'all' || categories.includes(filter)) {
+                        gsap.to(item, {
+                            duration: 0.5,
+                            opacity: 1,
+                            scale: 1,
+                            display: 'block',
+                            ease: 'power2.out'
+                        });
+                    } else {
+                        gsap.to(item, {
+                            duration: 0.3,
+                            opacity: 0,
+                            scale: 0.8,
+                            ease: 'power2.out',
+                            onComplete: () => {
+                                item.style.display = 'none';
+                            }
+                        });
+                    }
+                });
+            });
+        });
+
+        // Enhanced scroll animation from hero to main content
+        gsap.to('.main-content', {
+            duration: 1.5,
+            y: 0,
+            opacity: 1,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.main-content',
+                start: 'top 90%',
+                end: 'top 50%',
+                scrub: 1,
+                toggleActions: 'play none none none'
+            }
+        });
+
+        // Smooth section transitions
+        gsap.utils.toArray('.section').forEach((section, index) => {
+            gsap.fromTo(section,
+                {
+                    y: 80,
+                    opacity: 0
+                },
+                {
+                    duration: 1.2,
+                    y: 0,
+                    opacity: 1,
+                    ease: 'power3.out',
+                    delay: index * 0.1,
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top 85%',
+                        end: 'top 30%',
+                        scrub: 1,
+                        toggleActions: 'play none none none'
+                    }
+                }
+            );
+        });
+
+        // GSAP Animations
+        // Header content animation with improved easing
+        gsap.fromTo('.header-content',
+            {
+                y: 150,
+                opacity: 0,
+                scale: 0.9
+            },
+            {
+                duration: 1.8,
+                y: 0,
+                opacity: 1,
+                scale: 1,
+                ease: 'power4.out',
+                delay: 0.3
+            }
+        );
+
+        // Enhanced stats animation with stagger effect
+        gsap.fromTo('.stat-item',
+            {
+                y: 80,
+                opacity: 0,
+                scale: 0.8
+            },
+            {
+                duration: 1,
+                y: 0,
+                opacity: 1,
+                scale: 1,
+                stagger: 0.15,
+                ease: 'back.out(1.4)',
+                delay: 1
+            }
+        );
+
+        // Enhanced portfolio items animation with improved timing
+        gsap.fromTo('.portfolio-item',
+            {
+                y: 100,
+                opacity: 0,
+                scale: 0.8,
+                rotationY: 10
+            },
+            {
+                duration: 1.2,
+                y: 0,
+                opacity: 1,
+                scale: 1,
+                rotationY: 0,
+                stagger: {
+                    amount: 0.6,
+                    from: "start"
+                },
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: '.portfolio-grid',
+                    start: 'top 85%',
+                    end: 'bottom 15%',
+                    toggleActions: 'play none none none'
+                }
+            }
+        );
+
+        // Enhanced section titles with cinematic reveal
+        gsap.utils.toArray('.section-title').forEach(title => {
+            // Create a mask effect
+            gsap.set(title, { 
+                clipPath: 'inset(0 100% 0 0)',
+                opacity: 1
+            });
+            
+            gsap.to(title, {
+                duration: 1.5,
+                clipPath: 'inset(0 0% 0 0)',
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: title,
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                }
+            });
+        });
+
+        // Enhanced filter buttons with wave animation
+        gsap.fromTo('.filter-btn',
+            {
+                y: 50,
+                opacity: 0,
+                scale: 0.8
+            },
+            {
+                duration: 0.8,
+                y: 0,
+                opacity: 1,
+                scale: 1,
+                stagger: {
+                    amount: 0.4,
+                    from: "center"
+                },
+                ease: 'back.out(1.2)',
+                scrollTrigger: {
+                    trigger: '.filter-buttons',
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                }
+            }
+        );
+
+        // Enhanced case study items with slide and fade
+        gsap.utils.toArray('.case-study-item').forEach((item, index) => {
+            const isEven = index % 2 === 0;
+            
+            gsap.fromTo(item,
+                {
+                    x: isEven ? -150 : 150,
+                    opacity: 0,
+                    rotationY: isEven ? -15 : 15
+                },
+                {
+                    duration: 1.4,
+                    x: 0,
+                    opacity: 1,
+                    rotationY: 0,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: item,
+                        start: 'top 85%',
+                        end: 'bottom 15%',
+                        toggleActions: 'play none none none'
+                    }
+                }
+            );
+        });
+
+        // Portfolio item hover effects
+        document.querySelectorAll('.portfolio-item').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                gsap.to(item, {
+                    duration: 0.4,
+                    y: -15,
+                    boxShadow: '0 25px 60px rgba(0, 0, 0, 0.2)',
+                    ease: 'power2.out'
+                });
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                gsap.to(item, {
+                    duration: 0.4,
+                    y: 0,
+                    boxShadow: '0 10px 40px rgba(0, 0, 0, 0.1)',
+                    ease: 'power2.out'
+                });
+            });
+        });
+
+        // Button hover effects
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('mouseenter', () => {
+                gsap.to(btn, {
+                    duration: 0.3,
+                    y: -3,
+                    ease: 'power2.out'
+                });
+            });
+            
+            btn.addEventListener('mouseleave', () => {
+                gsap.to(btn, {
+                    duration: 0.3,
+                    y: 0,
+                    ease: 'power2.out'
+                });
+            });
+        });
+
+        // Filter button hover effects
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('mouseenter', () => {
+                if (!btn.classList.contains('active')) {
+                    gsap.to(btn, {
+                        duration: 0.3,
+                        y: -2,
+                        ease: 'power2.out'
+                    });
+                }
+            });
+            
+            btn.addEventListener('mouseleave', () => {
+                if (!btn.classList.contains('active')) {
+                    gsap.to(btn, {
+                        duration: 0.3,
+                        y: 0,
+                        ease: 'power2.out'
+                    });
+                }
+            });
+        });
+
+        // Mobile menu functionality
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenu.addEventListener('click', () => {
+            const isOpen = navLinks.style.display === 'flex';
+            
+            if (isOpen) {
+                gsap.to(navLinks, {
+                    duration: 0.3,
+                    opacity: 0,
+                    y: -10,
+                    ease: 'power2.out',
+                    onComplete: () => {
+                        navLinks.style.display = 'none';
+                    }
+                });
+            } else {
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '100%';
+                navLinks.style.left = '0';
+                navLinks.style.right = '0';
+                navLinks.style.background = 'rgba(13, 27, 42, 0.98)';
+                navLinks.style.padding = '1rem';
+                navLinks.style.backdropFilter = 'blur(10px)';
+                navLinks.style.opacity = '0';
+                
+                gsap.to(navLinks, {
+                    duration: 0.3,
+                    opacity: 1,
+                    y: 0,
+                    ease: 'power2.out'
+                });
+            }
+        });
+
+        // Counter animation for stats
+        function animateCounter(element, target) {
+            const counter = { value: 0 };
+            const isPercentage = target.includes('%');
+            const numericTarget = parseInt(target.replace(/[^\d]/g, ''));
+            
+            gsap.to(counter, {
+                duration: 2,
+                value: numericTarget,
+                ease: 'power2.out',
+                onUpdate: () => {
+                    const currentValue = Math.round(counter.value);
+                    element.textContent = isPercentage ? currentValue + '%' : currentValue + '+';
+                },
+                scrollTrigger: {
+                    trigger: element,
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                }
+            });
+        }
+
+        // Animate stat numbers
+        document.querySelectorAll('.stat-number').forEach(stat => {
+            const target = stat.textContent;
+            animateCounter(stat, target);
+        });
+
+        // Loading animation
+        window.addEventListener('load', () => {
+            gsap.to('body', {
+                duration: 0.5,
+                opacity: 1,
+                ease: 'power2.out'
+            });
+        });
+
+        // Smooth page transitions
+        document.querySelectorAll('a[href$=".html"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                
+                gsap.to('body', {
+                    duration: 0.5,
+                    opacity: 0,
+                    ease: 'power2.out',
+                    onComplete: () => {
+                        window.location.href = href;
+                    }
+                });
+            });
+        });
+
+        // Parallax effect for header
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const header = document.querySelector('.page-header');
+            const headerHeight = header.offsetHeight;
+            
+            if (scrolled < headerHeight) {
+                const speed = scrolled * 0.3;
+                header.style.transform = `translateY(${speed}px)`;
+            }
+        });
+
+        // Initialize any tooltips or additional interactive elements
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add any additional initialization code here
+            console.log('MoyoCode Portfolio Page Loaded Successfully');
+        });
+    </script>
+</body>
+</html>

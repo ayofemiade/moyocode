@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - MoyoCode | Premium Web Design & Development</title>
+    <meta name="description" content="Get in touch with MoyoCode for premium web design and development services. Fast delivery, custom solutions, and exceptional customer satisfaction.">
+    <meta name="keywords" content="contact web designer, hire web developer, custom website quote, web design consultation">
+    
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Primary Palette */
+            --rich-gold: #B8860B;
+            --warm-champagne: #D4AF37;
+            --medium-bronze: #CBAE85;
+            --light-beige: #F5E9DA;
+            --charcoal-navy: #0D1B2A;
+            --deep-charcoal: #2C2C2C;
+            
+            /* Supporting Shades */
+            --off-white: #FAFAFA;
+            --warm-gray: #8A8A8A;
+            --olive-green: #556B2F;
+            --dark-olive: #3C4B1C;
+            
+            /* Typography */
+            --font-heading: 'Inter', sans-serif;
+            --font-accent: 'Playfair Display', serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-heading);
+            line-height: 1.6;
+            color: var(--deep-charcoal);
+            background-color: var(--off-white);
+            overflow-x: hidden;
+        }
+
+        /* Navigation - Same as homepage */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(13, 27, 42, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(13, 27, 42, 0.98);
+            padding: 0.5rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-family: var(--font-accent);
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--warm-champagne);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .logo:hover {
+            color: var(--rich-gold);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--off-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a.active,
+        .nav-links a:hover {
+            color: var(--warm-champagne);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--warm-champagne);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a.active::after,
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--warm-champagne);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--charcoal-navy) 0%, var(--deep-charcoal) 100%);
+            padding: 120px 0 80px;
+            text-align: center;
+            color: var(--off-white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="0.5" fill="%23D4AF37" opacity="0.1"/><circle cx="75" cy="75" r="0.3" fill="%23B8860B" opacity="0.1"/><circle cx="50" cy="10" r="0.4" fill="%23CBAE85" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .page-header-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-header h1 {
+            font-family: var(--font-accent);
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--warm-champagne), var(--rich-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--light-beige);
+            font-weight: 300;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 80px 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        /* Contact Form */
+        .contact-form-section {
+            background: var(--off-white);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .form-title {
+            font-family: var(--font-accent);
+            font-size: 2rem;
+            color: var(--charcoal-navy);
+            margin-bottom: 1rem;
+        }
+
+        .form-subtitle {
+            color: var(--warm-gray);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            color: var(--deep-charcoal);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 1rem;
+            border: 2px solid rgba(44, 44, 44, 0.1);
+            border-radius: 12px;
+            background: var(--off-white);
+            color: var(--deep-charcoal);
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--warm-champagne);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .budget-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .budget-option {
+            position: relative;
+        }
+
+        .budget-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .budget-label {
+            display: block;
+            padding: 1rem;
+            border: 2px solid rgba(44, 44, 44, 0.1);
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .budget-option input[type="radio"]:checked + .budget-label {
+            border-color: var(--warm-champagne);
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--rich-gold);
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--warm-champagne), var(--rich-gold));
+            color: var(--charcoal-navy);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Contact Info */
+        .contact-info-section {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-card {
+            background: var(--light-beige);
+            padding: 2rem;
+            border-radius: 20px;
+            border-left: 4px solid var(--warm-champagne);
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-card-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--warm-champagne), var(--rich-gold));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-card h3 {
+            font-family: var(--font-accent);
+            font-size: 1.3rem;
+            color: var(--charcoal-navy);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card p {
+            color: var(--deep-charcoal);
+            line-height: 1.6;
+        }
+
+        .contact-card a {
+            color: var(--rich-gold);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .contact-card a:hover {
+            color: var(--warm-champagne);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: var(--charcoal-navy);
+            padding: 6rem 0;
+            margin-top: 4rem;
+        }
+
+        .faq-section .section-title {
+            font-family: var(--font-accent);
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--warm-champagne);
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .faq-item {
+            background: var(--deep-charcoal);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .faq-question {
+            font-family: var(--font-accent);
+            font-size: 1.2rem;
+            color: var(--warm-champagne);
+            margin-bottom: 1rem;
+        }
+
+        .faq-answer {
+            color: var(--light-beige);
+            line-height: 1.6;
+        }
+
+        /* Social Links */
+        .social-section {
+            text-align: center;
+            padding: 4rem 0;
+            background: var(--light-beige);
+        }
+
+        .social-title {
+            font-family: var(--font-accent);
+            font-size: 2rem;
+            color: var(--charcoal-navy);
+            margin-bottom: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-link {
+            width: 60px;
+            height: 60px;
+            background: var(--off-white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--warm-champagne);
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            border: 2px solid var(--warm-champagne);
+        }
+
+        .social-link:hover {
+            background: var(--warm-champagne);
+            color: var(--charcoal-navy);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: linear-gradient(135deg, var(--olive-green), var(--dark-olive));
+            color: var(--off-white);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .success-message.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading State */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(13, 27, 42, 0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(212, 175, 55, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--warm-champagne);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: flex;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .budget-options {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form-section {
+                padding: 2rem;
+            }
+
+            .page-header {
+                padding: 100px 0 60px;
+            }
+
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .social-links {
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .contact-form-section {
+                padding: 1.5rem;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">MoyoCode</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="service.html">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="page-header-content fade-in">
+                <h1>Let's Create Something Amazing Together</h1>
+                <p>Ready to bring your vision to life? Let's discuss your project and create digital experiences that convert.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="main-content">
+        <div class="container">
+            <div class="contact-grid">
+                <!-- Contact Form -->
+                <div class="contact-form-section slide-in-left">
+                    <h2 class="form-title">Start Your Project</h2>
+                    <p class="form-subtitle">Tell me about your vision and let's make it reality. I respond to all inquiries within 24 hours.</p>
+                    
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="company">Company/Organization</label>
+                            <input type="text" id="company" name="company" placeholder="Optional">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="projectType">Project Type</label>
+                            <select id="projectType" name="projectType" required>
+                                <option value="">Select your project type</option>
+                                <option value="web-design">Web Design Only</option>
+                                <option value="web-development">Web Development Only</option>
+                                <option value="full-project">Complete Website (Design + Development)</option>
+                                <option value="redesign">Website Redesign</option>
+                                <option value="maintenance">Website Maintenance & Updates</option>
+                                <option value="consultation">Consultation Only</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Project Budget Range</label>
+                            <div class="budget-options">
+                                <div class="budget-option">
+                                    <input type="radio" id="budget1" name="budget" value="500-1500">
+                                    <label for="budget1" class="budget-label">$500 - $1,500</label>
+                                </div>
+                                <div class="budget-option">
+                                    <input type="radio" id="budget2" name="budget" value="1500-3000">
+                                    <label for="budget2" class="budget-label">$1,500 - $3,000</label>
+                                </div>
+                                <div class="budget-option">
+                                    <input type="radio" id="budget3" name="budget" value="3000-5000">
+                                    <label for="budget3" class="budget-label">$3,000 - $5,000</label>
+                                </div>
+                                <div class="budget-option">
+                                    <input type="radio" id="budget4" name="budget" value="5000+">
+                                    <label for="budget4" class="budget-label">$5,000+</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="timeline">Desired Timeline</label>
+                            <select id="timeline" name="timeline" required>
+                                <option value="">Select your timeline</option>
+                                <option value="asap">ASAP (Rush Job)</option>
+                                <option value="1-2-weeks">1-2 Weeks</option>
+                                <option value="3-4-weeks">3-4 Weeks</option>
+                                <option value="1-2-months">1-2 Months</option>
+                                <option value="flexible">Flexible</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Project Details</label>
+                            <textarea id="message" name="message" placeholder="Describe your project vision, goals, target audience, and any specific requirements..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Send Project Inquiry</button>
+                    </form>
+                    
+                    <div class="success-message" id="successMessage">
+                        <h3>Thank You! 🎉</h3>
+                        <p>Your project inquiry has been sent successfully. I'll review your requirements and get back to you within 24 hours with next steps and a detailed proposal.</p>
+                    </div>
+                </div>
+                
+                <!-- Contact Information -->
+                <div class="contact-info-section slide-in-right">
+                    <div class="contact-card">
+                        <div class="contact-card-icon">📧</div>
+                        <h3>Email Me Directly</h3>
+                        <p>For quick questions or detailed discussions about your project.</p>
+                        <a href="mailto:hello@moyocode.com">hello@moyocode.com</a>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-card-icon">📞</div>
+                        <h3>Schedule a Call</h3>
+                        <p>Let's discuss your project in detail. Free 30-minute consultation available.</p>
+                        <a href="#" onclick="alert('Booking system integration would go here')">Book a Call</a>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-card-icon">⚡</div>
+                        <h3>Response Time</h3>
+                        <p>I respond to all inquiries within 24 hours, often much sooner. For urgent projects, please mention it in your message.</p>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-card-icon">🌍</div>
+                        <h3>Location & Availability</h3>
+                        <p>Based in Lagos, Nigeria. Available for remote work worldwide. Open to collaboration across all time zones.</p>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-card-icon">💰</div>
+                        <h3>Pricing Philosophy</h3>
+                        <p>Premium quality at competitive rates. Custom quotes based on project scope. No hidden fees, transparent pricing.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title fade-in">Frequently Asked Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-item scale-in">
+                    <h3 class="faq-question">How long does a typical project take?</h3>
+                    <p class="faq-answer">Project timelines vary based on complexity. A simple website takes 1-2 weeks, while complex custom solutions may take 4-8 weeks. I always provide realistic timelines during our initial consultation.</p>
+                </div>
+                
+                <div class="faq-item scale-in">
+                    <h3 class="faq-question">What's included in your web development service?</h3>
+                    <p class="faq-answer">Custom-coded websites, responsive design, SEO optimization, performance optimization, content management system integration, and 30 days of post-launch support.</p>
+                </div>
+                
+                <div class="faq-item scale-in">
+                    <h3 class="faq-question">Do you offer website maintenance?</h3>
+                    <p class="faq-answer">Yes! I offer ongoing maintenance packages including updates, security monitoring, backups, and content updates. Perfect for keeping your site running smoothly.</p>
+                </div>
+                
+                <div class="faq-item scale-in">
+                    <h3 class="faq-question">Can you work with my existing brand guidelines?</h3>
+                    <p class="faq-answer">Absolutely! I specialize in understanding and implementing brand identities. I'll work within your existing guidelines while suggesting improvements where beneficial.</p>
+                </div>
+                
+                <div class="faq-item scale-in">
+                    <h3 class="faq-question">What makes MoyoCode different?</h3>
+                    <p class="faq-answer">I combine premium design with custom development, fast delivery, and exceptional customer satisfaction. Every project is built from scratch, never using templates.</p>
+                </div>
+                
+                <div class="faq-item scale-in">
+                    <h3 class="faq-question">Do you provide hosting and domain services?</h3>
+                    <p class="faq-answer">I can help you choose the right hosting solution and assist with domain registration, but I focus on design and development. I'll recommend the best hosting for your specific needs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Links Section -->
+    <section class="social-section">
+        <div class="container">
+            <h2 class="social-title fade-in">Connect With Me</h2>
+            <div class="social-links">
+                <a href="#" class="social-link" title="LinkedIn" aria-label="LinkedIn Profile">💼</a>
+                <a href="#" class="social-link" title="Twitter" aria-label="Twitter Profile">🐦</a>
+                <a href="#" class="social-link" title="Instagram" aria-label="Instagram Profile">📷</a>
+                <a href="#" class="social-link" title="GitHub" aria-label="GitHub Profile">🔗</a>
+                <a href="mailto:hello@moyocode.com" class="social-link" title="Email" aria-label="Email Contact">📧</a>
+                <a href="#" class="social-link" title="WhatsApp" aria-label="WhatsApp Contact">📱</a>
+            </div>
+            <p class="fade-in">Follow me for web design tips, development insights, and project updates!</p>
+        </div>
+    </section>
+
+    <script>
+        // Register GSAP ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Navbar scroll effect
+        let ticking = false;
+        
+        function updateNavbar() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            ticking = false;
+        }
+        
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(updateNavbar);
+                ticking = true;
+            }
+        });
+
+        // GSAP Animations
+        // Page load animation
+        gsap.from('.page-header-content', {
+            duration: 1.2,
+            y: 100,
+            opacity: 0,
+            ease: 'power3.out',
+            delay: 0.3
+        });
+
+        // Fade in animations
+        gsap.utils.toArray('.fade-in').forEach(element => {
+            gsap.fromTo(element, 
+                {
+                    y: 50,
+                    opacity: 0
+                },
+                {
+                    duration: 1,
+                    y: 0,
+                    opacity: 1,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: element,
+                        start: 'top 85%',
+                        end: 'bottom 15%',
+                        toggleActions: 'play none none none'
+                    }
+                }
+            );
+        });
+
+        // Slide in animations
+        gsap.utils.toArray('.slide-in-left').forEach(element => {
+            gsap.fromTo(element,
+                {
+                    x: -100,
+                    opacity: 0
+                },
+                {
+                    duration: 1,
+                    x: 0,
+                    opacity: 1,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: element,
+                        start: 'top 85%',
+                        end: 'bottom 15%',
+                        toggleActions: 'play none none none'
+                    }
+                }
+            );
+        });
+
+        gsap.utils.toArray('.slide-in-right').forEach(element => {
+            gsap.fromTo(element,
+                {
+                    x: 100,
+                    opacity: 0
+                },
+                {
+                    duration: 1,
+                    x: 0,
+                    opacity: 1,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: element,
+                        start: 'top 85%',
+                        end: 'bottom 15%',
+                        toggleActions: 'play none none none'
+                    }
+                }
+            );
+        });
+
+        // Scale in animations
+        gsap.utils.toArray('.scale-in').forEach(element => {
+            gsap.fromTo(element,
+                {
+                    scale: 0.8,
+                    opacity: 0
+                },
+                {
+                    duration: 1,
+                    scale: 1,
+                    opacity: 1,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: element,
+                        start: 'top 85%',
+                        end: 'bottom 15%',
+                        toggleActions: 'play none none none'
+                    }
+                }
+            );
+        });
+
+        // FAQ items stagger animation
+        gsap.fromTo('.faq-item',
+            {
+                y: 30,
+                opacity: 0
+            },
+            {
+                duration: 0.6,
+                y: 0,
+                opacity: 1,
+                stagger: 0.15,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: '.faq-grid',
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                }
+            }
+        );
+
+        // Contact cards hover effects
+        document.querySelectorAll('.contact-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                gsap.to(card, {
+                    duration: 0.3,
+                    x: 10,
+                    ease: 'power2.out'
+                });
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                gsap.to(card, {
+                    duration: 0.3,
+                    x: 0,
+                    ease: 'power2.out'
+                });
+            });
+        });
+
+        // Form input animations
+        document.querySelectorAll('.form-group input, .form-group select, .form-group textarea').forEach(input => {
+            input.addEventListener('focus', () => {
+                gsap.to(input, {
+                    duration: 0.3,
+                    y: -2,
+                    boxShadow: '0 0 0 3px rgba(212, 175, 55, 0.1)',
+                    ease: 'power2.out'
+                });
+            });
+            
+            input.addEventListener('blur', () => {
+                gsap.to(input, {
+                    duration: 0.3,
+                    y: 0,
+                    boxShadow: 'none',
+                    ease: 'power2.out'
+                });
+            });
+        });
+
+        // Button hover effects
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('mouseenter', () => {
+                gsap.to(btn, {
+                    duration: 0.3,
+                    y: -3,
+                    boxShadow: '0 10px 30px rgba(212, 175, 55, 0.4)',
+                    ease: 'power2.out'
+                });
+            });
+            
+            btn.addEventListener('mouseleave', () => {
+                gsap.to(btn, {
+                    duration: 0.3,
+                    y: 0,
+                    boxShadow: 'none',
+                    ease: 'power2.out'
+                });
+            });
+        });
+
+        // Social links hover effects
+        document.querySelectorAll('.social-link').forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                gsap.to(link, {
+                    duration: 0.3,
+                    y: -3,
+                    scale: 1.1,
+                    boxShadow: '0 10px 30px rgba(212, 175, 55, 0.3)',
+                    ease: 'power2.out'
+                });
+            });
+            
+            link.addEventListener('mouseleave', () => {
+                gsap.to(link, {
+                    duration: 0.3,
+                    y: 0,
+                    scale: 1,
+                    boxShadow: 'none',
+                    ease: 'power2.out'
+                });
+            });
+        });
+
+        // Form submission handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show loading overlay
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            loadingOverlay.style.display = 'flex';
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Validate required fields
+            const requiredFields = ['firstName', 'lastName', 'email', 'projectType', 'timeline', 'message'];
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                const input = document.getElementById(field);
+                if (!input.value.trim()) {
+                    isValid = false;
+                    input.style.borderColor = '#e74c3c';
+                    gsap.to(input, {
+                        duration: 0.3,
+                        x: -5,
+                        yoyo: true,
+                        repeat: 5,
+                        ease: 'power2.inOut'
+                    });
+                } else {
+                    input.style.borderColor = 'rgba(44, 44, 44, 0.1)';
+                }
+            });
+            
+            if (!isValid) {
+                loadingOverlay.style.display = 'none';
+                return;
+            }
+            
+            // Simulate form submission
+            setTimeout(() => {
+                loadingOverlay.style.display = 'none';
+                
+                // Hide form and show success message
+                gsap.to(this, {
+                    duration: 0.5,
+                    opacity: 0,
+                    y: -20,
+                    ease: 'power2.out',
+                    onComplete: () => {
+                        this.style.display = 'none';
+                        const successMessage = document.getElementById('successMessage');
+                        successMessage.classList.add('show');
+                        gsap.to(successMessage, {
+                            duration: 0.5,
+                            opacity: 1,
+                            y: 0,
+                            ease: 'power2.out'
+                        });
+                    }
+                });
+                
+                // In a real application, you would send the data to your server here
+                console.log('Form submitted with data:', data);
+                
+                // Reset form after delay
+                setTimeout(() => {
+                    this.reset();
+                    this.style.display = 'flex';
+                    this.style.opacity = '1';
+                    this.style.transform = 'translateY(0)';
+                    document.getElementById('successMessage').classList.remove('show');
+                }, 5000);
+                
+            }, 2000);
+        });
+
+        // Budget option animations
+        document.querySelectorAll('.budget-option input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                // Reset all labels
+                document.querySelectorAll('.budget-label').forEach(label => {
+                    gsap.to(label, {
+                        duration: 0.3,
+                        scale: 1,
+                        ease: 'power2.out'
+                    });
+                });
+                
+                // Animate selected label
+                if (this.checked) {
+                    const label = this.nextElementSibling;
+                    gsap.to(label, {
+                        duration: 0.3,
+                        scale: 1.05,
+                        ease: 'power2.out'
+                    });
+                }
+            });
+        });
+
+        // Mobile menu functionality
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenu.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            navLinks.style.flexDirection = 'column';
+            navLinks.style.position = 'absolute';
+            navLinks.style.top = '100%';
+            navLinks.style.left = '0';
+            navLinks.style.right = '0';
+            navLinks.style.background = 'rgba(13, 27, 42, 0.98)';
+            navLinks.style.padding = '1rem';
+            navLinks.style.backdropFilter = 'blur(10px)';
+        });
+
+        // Smooth page transitions
+        document.querySelectorAll('a[href$=".html"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                
+                gsap.to('body', {
+                    duration: 0.5,
+                    opacity: 0,
+                    ease: 'power2.out',
+                    onComplete: () => {
+                        window.location.href = href;
+                    }
+                });
+            });
+        });
+
+        // Page load animation
+        window.addEventListener('load', () => {
+            gsap.to('body', {
+                duration: 0.5,
+                opacity: 1,
+                ease: 'power2.out'
+            });
+        });
+
+        // Form validation with real-time feedback
+        document.querySelectorAll('input[required], select[required], textarea[required]').forEach(field => {
+            field.addEventListener('blur', function() {
+                if (!this.value.trim()) {
+                    this.style.borderColor = '#e74c3c';
+                } else {
+                    this.style.borderColor = 'var(--warm-champagne)';
+                }
+            });
+            
+            field.addEventListener('input', function() {
+                if (this.value.trim()) {
+                    this.style.borderColor = 'var(--warm-champagne)';
+                } else {
+                    this.style.borderColor = 'rgba(44, 44, 44, 0.1)';
+                }
+            });
+        });
+
+        // Email validation
+        document.getElementById('email').addEventListener('blur', function() {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (this.value && !emailRegex.test(this.value)) {
+                this.style.borderColor = '#e74c3c';
+            } else if (this.value) {
+                this.style.borderColor = 'var(--warm-champagne)';
+            }
+        });
+
+        // Phone number formatting (optional enhancement)
+        document.getElementById('phone').addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, '');
+            if (value.length >= 6) {
+                value = value.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+            } else if (value.length >= 3) {
+                value = value.replace(/(\d{3})(\d{3})/, '($1) $2');
+            }
+            this.value = value;
+        });
+    </script>
+</body>
+</html>
