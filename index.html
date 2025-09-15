@@ -61,9 +61,18 @@
             width: 100%;
             background: rgba(13, 27, 42, 0.95);
             backdrop-filter: blur(10px);
-            z-index: 1000;
+            z-index: 9999;
             padding: 1rem 0;
             transition: all 0.3s ease;
+            will-change: transform;
+            transform: translateZ(0);
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                backdrop-filter: none;
+                background: rgba(13, 27, 42, 0.98);
+            }
         }
 
         .navbar.scrolled {
@@ -1184,35 +1193,55 @@
             });
         }
 
-        // Subtle parallax effect for hero section (only when hero is visible and contained)
-        window.addEventListener('scroll', () => {
+        // Safe parallax effect for hero content only (avoid stacking context issues)
+        let parallaxTicking = false;
+        
+        function updateParallax() {
             const scrolled = window.pageYOffset;
             const heroSection = document.querySelector('.hero');
-            const heroHeight = heroSection.offsetHeight;
+            const heroContent = document.querySelector('.hero-content');
             
-            // Only apply parallax when hero section is visible and limit the effect
-            if (scrolled < heroHeight) {
-                const speed = scrolled * 0.2; // Further reduced speed
-                // Limit the transform to prevent affecting other sections
-                const maxTransform = heroHeight * 0.2;
-                const transformValue = Math.min(speed, maxTransform);
-                heroSection.style.transform = `translateY(${transformValue}px)`;
-            } else {
-                // Reset transform when past hero section
-                heroSection.style.transform = `translateY(0px)`;
+            if (heroSection && heroContent) {
+                const heroHeight = heroSection.offsetHeight;
+                
+                // Only apply parallax when hero section is visible
+                if (scrolled < heroHeight) {
+                    const speed = scrolled * 0.15; // Reduced speed for smoother effect
+                    const maxTransform = heroHeight * 0.15;
+                    const transformValue = Math.min(speed, maxTransform);
+                    heroContent.style.transform = `translateY(${transformValue}px)`;
+                } else {
+                    heroContent.style.transform = `translateY(0px)`;
+                }
             }
-        });
+            
+            parallaxTicking = false;
+        }
+        
+        function requestParallaxTick() {
+            if (!parallaxTicking) {
+                requestAnimationFrame(updateParallax);
+                parallaxTicking = true;
+            }
+        }
+        
+        window.addEventListener('scroll', requestParallaxTick, { passive: true });
 
         // Remove the conflicting Intersection Observer
         // Elements now show properly with GSAP ScrollTrigger only
 
-        // Add loading animation
+        // Add loading animation and ScrollTrigger refresh
         window.addEventListener('load', () => {
             gsap.to('body', {
                 duration: 0.5,
                 opacity: 1,
                 ease: 'power2.out'
             });
+            
+            // Refresh ScrollTrigger after load to ensure proper mobile initialization
+            if (typeof ScrollTrigger !== 'undefined') {
+                ScrollTrigger.refresh();
+            }
         });
 
         // Add smooth page transitions preparation
